@@ -49,6 +49,7 @@ gem "devise"
 gem "omniauth"
 gem "omniauth-twitter"
 gem "geocoder"
+gem "chronic"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

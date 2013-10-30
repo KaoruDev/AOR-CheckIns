@@ -3,3 +3,10 @@
 
 -@events.each do |event|
   =event.name
+  =event.street_address
+  =event.city
+  =event.state
+  =event.latitude
+  =event.longitude
+  =link_to "Check in!", check_in_path(event), method: :post
+  %br

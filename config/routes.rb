@@ -1,6 +1,6 @@
 AORCheckIn::Application.routes.draw do
-  get "events/index"
   resources :events
+  post "event/:id/check_in" => "events#check_in", as: "check_in"
   root "events#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
