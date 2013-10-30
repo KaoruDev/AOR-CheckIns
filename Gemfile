@@ -39,6 +39,7 @@ group :development do
   gem "binding_of_caller"
   gem 'figaro'
   gem "quiet_assets"
+  gem "html2haml"
 end
 
 group :test do

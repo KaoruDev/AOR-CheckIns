@@ -1,3 +1,7 @@
 %h1=@event.name
 %h3=@event.date.strftime("%b %e, %Y")
+=link_to "Check In!", check_in_path, remote: true, method: :post
 %h4 List of Attendees
+-@attendees.each do |attendee|
+  =attendee.name
+  =attendee.twitter_handle

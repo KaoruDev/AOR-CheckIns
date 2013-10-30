@@ -12,10 +12,26 @@ class User < ActiveRecord::Base
       user = User.create(name:auth.extra.raw_info.name,
                            provider:auth.provider,
                            uid:auth.uid,
+                           twitter_handle: auth[:extra][:raw_info][:screen_name],
                            email:"#{auth.uid}@twitter.com",
                            password:Devise.friendly_token[0,20]
                            )
     end
+
+    # Update changes user made on twitter profile
+    if did_user_update_info(user, auth)
+      user.twitter_handle = auth[:extra][:raw_info][:screen_name]
+      user.save
+    end
+
     user
   end
+
+############## PRIVATE #####################
+  private
+
+  def self.did_user_update_info(user, auth)
+    user.twitter_handle != auth[:extra][:raw_info][:screen_name]
+  end
+
 end

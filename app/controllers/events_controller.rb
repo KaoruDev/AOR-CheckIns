@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @events = Event.update_and_get_all
     @event = Event.new
@@ -6,6 +8,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @attendees = @event.attendees.all
   end
 
   def create
@@ -15,7 +18,8 @@ class EventsController < ApplicationController
   end
 
   def check_in
-
+    @event = Event.find(params[:id])
+    @event.attendees.create(name: current_user.name, twitter_handle: current_user.twitter_handle)
   end
 
   private
