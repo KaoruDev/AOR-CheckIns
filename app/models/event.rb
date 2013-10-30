@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
-  has_many :attendees
+  has_many :check_ins
+  has_many :users, :through => :check_ins
   
   geocoded_by :full_street_address
   after_validation :geocode

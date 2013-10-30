@@ -8,7 +8,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @attendees = @event.attendees.all
+    @attendees = @event.users.all
   end
 
   def create
@@ -19,7 +19,8 @@ class EventsController < ApplicationController
 
   def check_in
     @event = Event.find(params[:id])
-    @event.attendees.create(name: current_user.name, twitter_handle: current_user.twitter_handle)
+    check_in = @event.check_ins.build(user_id: current_user.id)
+    check_in.save
   end
 
   private
