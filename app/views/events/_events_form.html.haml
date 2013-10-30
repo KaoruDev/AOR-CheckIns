@@ -12,13 +12,13 @@
   .row
     .columns.large-6
       =f.label :street_address
-      =f.text_field :street_address
+      =f.text_field :street_address, value: "700 San Jacinto Blvd."
     .columns.large-3
       =f.label :city
-      =f.text_field :city
+      =f.text_field :city, value: "Austin"
     .columns.large-3
       =f.label :state
-      =f.text_field :state
+      =f.text_field :state, value: "TX"
   .row
     .columns.large-12
       =f.submit

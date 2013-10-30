@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
       user = User.create(name:auth.extra.raw_info.name,
                            provider:auth.provider,
                            uid:auth.uid,
+                           avatar: auth[:info][:image],
                            twitter_handle: auth[:extra][:raw_info][:screen_name],
                            email:"#{auth.uid}@twitter.com",
                            password:Devise.friendly_token[0,20]

@@ -1,7 +1,8 @@
 %h1=@event.name
 %h3=@event.date.strftime("%b %e, %Y")
-=link_to "Check In!", check_in_path, remote: true, method: :post
+=link_to "Check In!", check_in_path, remote: true, method: :post unless @attendees.include? current_user
 %h4 List of Attendees
 -@attendees.each do |attendee|
+  =image_tag attendee.avatar
   =attendee.name
   =attendee.twitter_handle
