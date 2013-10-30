@@ -1,5 +1,5 @@
 AORCheckIn::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
   resources :events
   post "event/:id/check_in" => "events#check_in", as: "check_in"
   root "events#index"
