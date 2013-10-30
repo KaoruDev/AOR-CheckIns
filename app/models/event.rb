@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  has_many :attendees
+  
   geocoded_by :full_street_address
   after_validation :geocode
 

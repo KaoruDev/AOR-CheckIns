@@ -23,12 +23,16 @@
   <body>
     <div class="row">
       <div class="columns large-12">
-        <h1> AOR Events </h1>
+        <h1><%=link_to "AOR Events", root_path %> </h1>
         <h5> Login links and such </h5>
       </div>
     </div>
-
-    <%= yield %>
+    
+    <div class="row">
+      <div class="columns large-12">
+        <%= yield %>
+      </div>
+    </div>
 
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= javascript_include_tag "application" %>

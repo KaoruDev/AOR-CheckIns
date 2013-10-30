@@ -2,7 +2,7 @@
 
 
 -@events.each do |event|
-  =event.name
+  =link_to event.name, event_path(event)
   =event.street_address
   =event.city
   =event.state
