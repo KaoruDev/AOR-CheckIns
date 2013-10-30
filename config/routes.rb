@@ -1,4 +1,5 @@
 AORCheckIn::Application.routes.draw do
+  devise_for :users
   resources :events
   post "event/:id/check_in" => "events#check_in", as: "check_in"
   root "events#index"
