@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_event, :except => [:index, :create]
 
   def index
     @events = Event.update_and_get_all
@@ -7,7 +8,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
     @attendees = @event.users.all
   end
 
@@ -17,13 +17,22 @@ class EventsController < ApplicationController
     redirect_to root_url
   end
 
+  def destroy
+    @event.destroy
+    redirect_to root_url
+  end
+
   def check_in
-    @event = Event.find(params[:id])
-    check_in = @event.check_ins.build(user_id: current_user.id)
+    @user = User.find(params[:user_id])
+    check_in = @event.check_ins.build(user_id: params[:user_id])
     check_in.save
   end
 
   private
+
+  def find_event
+    @event = Event.find(params[:id])
+  end
 
   def event_params
     params[:event][:date] = Chronic.parse(params[:event][:date])

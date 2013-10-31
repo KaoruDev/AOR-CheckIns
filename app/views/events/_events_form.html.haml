@@ -7,7 +7,7 @@
   .row
     .columns.large-4
       =f.label :date
-      =f.text_field :date
+      =f.text_field :date, value: "#{DateTime.now.to_date}"
   
   .row
     .columns.large-6

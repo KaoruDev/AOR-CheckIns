@@ -1,0 +1,10 @@
+(function(){
+
+  var brickTemplate = _.getTemplate("bricks");
+  var attendee = <%= raw @user.to_json %>;
+
+  $(".attendees").prepend(brickTemplate(attendee));
+
+  $(".check_in_link").hide();
+
+})();
