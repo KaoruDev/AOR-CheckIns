@@ -1,6 +1,14 @@
 %h1=@event.name
-%h3=@event.date.strftime("%b %e, %Y")
-=link_to "Check In!", check_in_path(:user_id => current_user.id), remote: true, method: :post, class: "check_in_link" unless @attendees.include? current_user
+%h3
+  =@event.date.strftime("%b %e, %Y")
+%h5
+  %span Lat: #{@event.longitude}
+  %br
+  %span Long: #{@event.latitude}
+-if can_user_check_in
+  - # TODO-KAORU
+  - # FOR WHATEVER REASON THIS IF STATEMENT EVALUATES TRUE FIX IT PLEASE!!!!!
+  =link_to "Check In!", check_in_path(:user_id => current_user.id), remote: true, method: :post, class: "check_in_link" 
 %h4 List of Attendees
 .attendees
   -@attendees.each do |attendee|
