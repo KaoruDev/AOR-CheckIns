@@ -38,8 +38,6 @@ class EventsController < ApplicationController
           PrivatePub.publish_to("/messages/#{@event.id}", "init.addUser(#{data.to_json});")
         }
       end
-    else
-      PrivatePub.publish_to("/messages/#{@event.id}", "alert(\"You're not at the event yet!\");")
     end
   end
 

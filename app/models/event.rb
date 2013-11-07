@@ -47,7 +47,7 @@ class Event < ActiveRecord::Base
     lat2 = toRad(self.latitude)
     a = Math::sin(dLat/2) * Math::sin(dLat/2) + Math::sin(dLon/2) * Math::sin(dLon/2) * Math::cos(lat1) * Math::cos(lat2)
     c = 2 * Math::atan2(Math::sqrt(a), Math::sqrt(1-a))
-    d = radius * c * 1000 # d is in meters
+    d = radius * c * 1000 # d is in metesrs
   end
 
   def toRad(number)

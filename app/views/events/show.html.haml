@@ -2,7 +2,9 @@
 %h3
   =@event.date.strftime("%b %e, %Y")
 %span.check-in
-%h4 List of Attendees
+%h4
+  List of Attendees
+
 .attendees
   -@attendees.each do |attendee|
     .brick
@@ -21,10 +23,9 @@
       %img{:src => "{{ avatar }}"}
       %span {{ name }}
       %a{href: "https://twitter.com/intent/user?screen_name={{ twitter_handle }}"} Follow
-
--if can_user_check_in
-  =content_for :javascript do
+=content_for :javascript do
+  -if can_user_check_in
     =subscribe_to "/messages/#{@event.id}"
-    
+
     :javascript
       init.geoLocation(#{@event.id}, #{current_user.id})
