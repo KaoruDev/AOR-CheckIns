@@ -46,6 +46,10 @@ group :test do
   gem "rspec-rails"
 end
 
+group :test do
+  gem "rails_12factor"
+end
+
 gem "haml"
 gem "zurb-foundation"
 gem "devise"
