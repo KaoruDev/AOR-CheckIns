@@ -21,7 +21,7 @@
     .brick
       %img{:src => "{{ avatar }}"}
       %span {{ name }}
-      %span {{ twitter_handle }}
+      %a{href: "https://twitter.com/intent/user?screen_name={{ twitter_handle }}"} Follow
 
 -if can_user_check_in
   =content_for :javascript do
