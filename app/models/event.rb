@@ -8,7 +8,10 @@ class Event < ActiveRecord::Base
   def self.update_and_get_all
     current_events = self.where(current_event: true)
     self.check_if_event_has_passed current_events
-    self.all
+    events = self.all
+    events.sort_by{|x|
+      x.date
+    }
   end
   
   def is_user_nearby(longitude, latitude)
