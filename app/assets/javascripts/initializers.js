@@ -1,12 +1,16 @@
 (function(){
   window.init = {
-    geoLocation: function(coordinates){
+    geoLocation: function(event_id, user_id){
       var currentCoords = {}
-      var check_in_link = $("#templates .check_in_link").html();
 
       navigator.geolocation.getCurrentPosition(function(pos){
         currentCoords.longitude = (pos.coords.longitude);
         currentCoords.latitude = (pos.coords.latitude);
+
+        $.ajax({
+          url: "event/event_id/check-in/user_id"
+          type: "POST"
+        })
 
         if(check_if_user_is_nearby(currentCoords, coordinates)){
           $(".check-in").append(check_in_link);

@@ -26,13 +26,8 @@
       %img{:src => "{{ avatar }}"}
       %span {{ name }}
       %span {{ twitter_handle }}
-  %script.check_in_link{:type => "text/template"}
-    -if can_user_check_in
-      =link_to "Check In!", check_in_path(:user_id => current_user.id), remote: true, method: :post 
 
-      =content_for :javascript do
-        :javascript
-          init.geoLocation({
-          longitude: #{@event.longitude}, 
-          latitude: #{@event.latitude}
-          })
+-if can_user_check_in
+  =content_for :javascript do
+    :javascript
+      init.geoLocation(#{@event.id}, #{current_user.id})
