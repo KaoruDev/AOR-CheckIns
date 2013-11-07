@@ -17,5 +17,6 @@
 //= require underscore
 //= require backbone
 //= require util
+//= require initializers
 
 $(function(){ $(document).foundation(); });

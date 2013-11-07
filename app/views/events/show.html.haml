@@ -5,10 +5,7 @@
   %span Lat: #{@event.longitude}
   %br
   %span Long: #{@event.latitude}
--if can_user_check_in
-  - # TODO-KAORU
-  - # FOR WHATEVER REASON THIS IF STATEMENT EVALUATES TRUE FIX IT PLEASE!!!!!
-  =link_to "Check In!", check_in_path(:user_id => current_user.id), remote: true, method: :post, class: "check_in_link" 
+%span.check-in
 %h4 List of Attendees
 .attendees
   -@attendees.each do |attendee|
@@ -29,3 +26,13 @@
       %img{:src => "{{ avatar }}"}
       %span {{ name }}
       %span {{ twitter_handle }}
+  %script.check_in_link{:type => "text/template"}
+    -if can_user_check_in
+      =link_to "Check In!", check_in_path(:user_id => current_user.id), remote: true, method: :post 
+
+      =content_for :javascript do
+        :javascript
+          init.geoLocation({
+          longitude: #{@event.longitude}, 
+          latitude: #{@event.latitude}
+          })
