@@ -13,15 +13,16 @@
             longitude: longitude,
             latitude: latitude
           },
-          success: addUser
+          success: function(){
+          }
         })
       });
+    },
+    addUser: function(data){
+      if(data){
+        var newHTML = _.getTemplate("bricks")(data);
+        $(".attendees").append(newHTML);
+      }
     }
-  }
-
-
-  var addUser = function(data){
-    var newHTML = _.getTemplate("bricks")(data)
-    $(".attendees").append(newHTML);
   }
 })();

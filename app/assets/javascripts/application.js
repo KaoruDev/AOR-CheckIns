@@ -16,6 +16,7 @@
 //= require foundation
 //= require underscore
 //= require backbone
+//= require private_pub
 //= require util
 //= require initializers
 

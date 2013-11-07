@@ -54,6 +54,10 @@ gem "omniauth-twitter"
 gem "geocoder"
 gem "chronic"
 
+gem "private_pub"
+gem "thin"
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

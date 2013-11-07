@@ -15,7 +15,6 @@
           =attendee.twitter_handle
           %br
           =link_to "Follow", "https://twitter.com/intent/user?screen_name=#{attendee.twitter_handle}"
-
 #templates
   %script.bricks{:type => "text/template"}
     .brick
@@ -25,5 +24,7 @@
 
 -if can_user_check_in
   =content_for :javascript do
+    =subscribe_to "/messages/#{@event.id}"
+    
     :javascript
       init.geoLocation(#{@event.id}, #{current_user.id})
