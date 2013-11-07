@@ -1,10 +1,6 @@
 %h1=@event.name
 %h3
   =@event.date.strftime("%b %e, %Y")
-%h5
-  %span Lat: #{@event.longitude}
-  %br
-  %span Long: #{@event.latitude}
 %span.check-in
 %h4 List of Attendees
 .attendees
