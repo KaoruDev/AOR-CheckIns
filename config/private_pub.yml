@@ -7,4 +7,4 @@ test:
 production:
   server: "http://kaoru-faye.herokuapp.com/faye"
   secret_token: "882a64db3f0b137d07748144ca408111d10693ea28e25dcabaf2cf7d9b74bc13"
-  signature_expiration: 3600 # one hour
+  signature_expiration: 6200 # one hour

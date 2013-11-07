@@ -48,10 +48,3 @@ test:
   database: AOR-Check-in_test
   pool: 5
   port: 5432
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: AOR-Check-in_production
-  pool: 5
-  port: 5432
