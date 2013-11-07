@@ -10,8 +10,18 @@ class Event < ActiveRecord::Base
     self.check_if_event_has_passed current_events
     self.all
   end
+  
+  def is_user_nearby(longitude, latitude)
+    distance = get_user_distance_from_event(longitude.to_f, latitude.to_f)
+    if distance < 30
+      true
+    else
+      false
+    end
+  end
 
   protected
+
 
   def self.check_if_event_has_passed(events)
       events.each do |event|
@@ -24,5 +34,20 @@ class Event < ActiveRecord::Base
 
   def full_street_address
     self.street_address + self.city + self.state
+  end
+
+  def get_user_distance_from_event(longitude, latitude)
+    radius = 6371
+    dLon = toRad(self.longitude - longitude)
+    dLat = toRad(self.latitude - latitude)
+    lat1 = toRad(latitude)
+    lat2 = toRad(self.latitude)
+    a = Math::sin(dLat/2) * Math::sin(dLat/2) + Math::sin(dLon/2) * Math::sin(dLon/2) * Math::cos(lat1) * Math::cos(lat2)
+    c = 2 * Math::atan2(Math::sqrt(a), Math::sqrt(1-a))
+    d = radius * c * 1000 # d is in meters
+  end
+
+  def toRad(number)
+    number * (Math::PI / 180)
   end
 end

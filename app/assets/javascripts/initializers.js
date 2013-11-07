@@ -1,21 +1,22 @@
 (function(){
   window.init = {
     geoLocation: function(event_id, user_id){
-      var currentCoords = {}
 
       navigator.geolocation.getCurrentPosition(function(pos){
-        currentCoords.longitude = (pos.coords.longitude);
-        currentCoords.latitude = (pos.coords.latitude);
+        var longitude = (pos.coords.longitude);
+        var latitude = (pos.coords.latitude);
 
         $.ajax({
-          url: "event/event_id/check-in/user_id"
-          type: "POST"
+          url: event_id + "/check-in/" + user_id,
+          type: "POST",
+          data:{
+            longitude: longitude,
+            latitude: latitude
+          },
+          success: function(data){
+            console.log(data)
+          }
         })
-
-        if(check_if_user_is_nearby(currentCoords, coordinates)){
-          $(".check-in").append(check_in_link);
-        }
-
       });
     }
   }

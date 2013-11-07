@@ -23,14 +23,19 @@ class EventsController < ApplicationController
   end
 
   def check_in
-    respond_to do |format|
-      format.js{
-        @user = User.find(params[:user_id])
-        check_in = @event.check_ins.build(user_id: params[:user_id])
-        check_in.save
-        render :json => {}
-        #TODO-KAORU  MAKE IT SO IT ONLY RESPONSE TO AJAX REQUEST
-      }
+    if @event.is_user_nearby(params[:longitude], params[:latitude])
+      respond_to do |format|
+        format.json{
+          @user = User.find(params[:user_id])
+          # check_in = @event.check_ins.build(user_id: params[:user_id])
+          # check_in.save
+          render :json => {
+            avatar: @user.avatar,
+            name: @user.name,
+            twitter_handle: @user.twitter_handle
+          }
+        }
+      end
     end
   end
 
