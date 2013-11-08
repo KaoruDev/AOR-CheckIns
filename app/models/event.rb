@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
   
   def is_user_nearby(longitude, latitude)
     distance = get_user_distance_from_event(longitude.to_f, latitude.to_f)
-    if distance < 30
+    if distance < 100
       true
     else
       false

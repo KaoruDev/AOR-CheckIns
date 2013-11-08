@@ -2,9 +2,10 @@
 
 
 -@events.each do |event|
-  =link_to event.name, event_path(event)
-  =event.street_address
-  =event.city
-  =event.state
-  =link_to "delete", event_path(event), method: :delete
-  %br
+  %p
+    =link_to event.name, event_path(event)
+    =event.street_address
+    =event.city
+    =event.state
+    =link_to "delete", event_path(event), method: :delete, remote: true
+    %br
