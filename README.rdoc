@@ -1,28 +1,33 @@
-== README
+Event-Check-in (Aimed to server Austin on Rails)
+==================
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Take attendance at your events. Users may only check-in if they are
+within 100 meters of the geolocation on set address.
 
-Things you may want to cover:
+Uses HTML5 geolocater to verify user is in within the radius set for the event.
 
-* Ruby version
+Show page will automatically update as users sign in using **Faye/private_pub**.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Uses **DEVISE/OMNITAUTH** for Twitter log-in.
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## Styling
+
+[Foundation](https://github.com/zurb/foundation-rails) is responsible for fluid mobile design.
+10.8.13 MVP Design, still needs to design everything out.
+
+## Rails Setup
+
+Rails app uses **postgres** so be sure it's running.
+
+1. Rake db:create db:migrate
+2. Rails Server
+3. [localhost](http://localhost:3000)
+
+## Websocket Setup
+
+**Faye/private_pub** follow these instructions here [Josh Crew](http://joshcrews.com/blog/2013/06/07/running-private-pub-slash-faye-server-on-heroku/)
+
+
+
+
