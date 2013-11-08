@@ -1,4 +1,4 @@
-Event-Check-in (Aimed to server Austin on Rails)
+Event-Check-in (Aimed to serve Austin on Rails)
 ==================
 
 Take attendance at your events. Users may only check-in if they are
@@ -27,7 +27,6 @@ Rails app uses **postgres** so be sure it's running.
 ## Websocket Setup
 
 **Faye/private_pub** follow these instructions here [Josh Crew](http://joshcrews.com/blog/2013/06/07/running-private-pub-slash-faye-server-on-heroku/)
-
 
 
 
