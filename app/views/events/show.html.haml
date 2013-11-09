@@ -1,6 +1,9 @@
 %h1=@event.name
 %h3
   =@event.date.strftime("%b %e, %Y")
+  -if !(@event.current_event)
+    %br
+    This event is now closed.
 %span.check-in
 %h4
   List of Attendees

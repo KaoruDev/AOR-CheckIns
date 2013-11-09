@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
     events = self.all
     events.sort_by{|x|
       x.date
-    }
+    }.reverse
   end
   
   def is_user_nearby(longitude, latitude)
