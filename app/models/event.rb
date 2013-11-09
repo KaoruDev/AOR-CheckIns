@@ -28,7 +28,7 @@ class Event < ActiveRecord::Base
 
   def self.check_if_event_has_passed(events)
       events.each do |event|
-      if event.date < Date.today
+      if event.date < DateTime.now.beginning_of_day
         event.current_event = false
         event.save
       end

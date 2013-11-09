@@ -13,6 +13,7 @@ class EventsController < ApplicationController
 
   def create
     @events = Event.new(event_params)
+
     @events.save
     redirect_to root_url
   end
