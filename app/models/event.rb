@@ -8,10 +8,11 @@ class Event < ActiveRecord::Base
   def self.update_and_get_all
     current_events = self.where(current_event: true)
     self.check_if_event_has_passed current_events
-    events = self.all
-    events.sort_by{|x|
-      x.date
-    }.reverse
+
+    sort_events self.all
+    # events.sort_by{|x|
+    #   x.date
+    # }.reverse
   end
   
   def is_user_nearby(longitude, latitude)
@@ -23,6 +24,14 @@ class Event < ActiveRecord::Base
     end
   end
 
+#######################################################
+##
+##                 
+##                     PROTECTED
+##
+##
+#######################################################
+
   protected
 
 
@@ -33,6 +42,24 @@ class Event < ActiveRecord::Base
         event.save
       end
     end
+  end
+
+  def self.sort_events(events)
+    results = {
+      current_events: [],
+      future_events: [],
+      past_events: []
+    }
+    events.each do |event|
+      if !event.current_event
+        results[:past_events] << event
+      elsif event.date > DateTime.now.at_end_of_day
+        results[:future_events] << event
+      else
+        results[:current_events] << event
+      end
+    end
+    results
   end
 
   def full_street_address

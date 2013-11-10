@@ -21,7 +21,7 @@
 
     eventList: function(){
       $("#event_date").datepicker({
-        minDate: 0
+        // minDate: 0
       });
 
       $(".add-event").on("click", function(e){

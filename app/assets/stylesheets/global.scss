@@ -1,28 +1,83 @@
 @import url("http://fonts.googleapis.com/css?family=Marcellus+SC");
 
-$primary: #A10303;
-$secondary: #BF0404;
+$primary: $primary-color;
+$secondary: #590202;
+$tertiary: #BF0404;
 $black: #000;
 $white: #fff;
+
+*{
+  box-sizing: border-box;
+}
 
 body{
   background-color: $primary;
   padding: 10px;
 }
 
+.main-content{
+  background-color: $white;
+  padding: 10px;
+  min-height: 700px;
+}
+
 h1, h2, h3, h4, h5{
   font-family: 'Marcellus SC', serif;
-  color: $white;
+  color: $primary;
+  border-bottom: solid 2px $secondary;
 }
 
 .button{
-  transition: background-color 0.2s;
-  transition: color 0.1s;
+  transition: background-color 0.3s;
+  transition: color 0.2s;
+  border: $black solid 1px;
+
   &:hover{
-    background-color: $secondary;
-    color: $white;
+    background-color: $white;
+    color: $primary;
   }
 }
+
+//////////////////////////////////////////////////
+//
+//
+//                    LOGIN      
+//
+//
+//////////////////////////////////////////////////
+
+
+.login-button{
+  margin: 0 auto;
+  width: 290px;
+  background-color: $primary;
+  border-radius: 5px;
+  border: $black 2px solid;
+  transition: background-color 0.2s;
+
+  &:hover{
+    background-color: $white;
+  }
+
+  div{
+    display: inline-block;
+    color: $white;
+    padding: 15px;
+  }
+  .twitter-icon{
+    border-right: 1px solid $black;
+    font-size: 2em;
+    padding-top: 10px;
+  }
+  .login-text{
+    font-size: 1.3em;
+  }
+
+  a:hover div{
+    color: $primary;
+  }
+}
+
 
 
 //////////////////////////////////////////////////
@@ -34,25 +89,26 @@ h1, h2, h3, h4, h5{
 //////////////////////////////////////////////////
 
 .banner{
-  .logo{
-    width: 200px;
-    margin: 0 auto;
-  }
-  h1{
-    text-align: center;
-    font-size: 3em;
-    margin: 0 auto 10px;
+  text-align: center;
 
-    a{
-      transition: color 0.2s;
-      &:hover{
-        color: #000;
-      }
-    }
+  h1{
+    font-size: 3em;
+    display: inline;
+    transition: color .2s
   }
+
+  a:hover h1{
+    color: $black;
+  }
+  
 
   nav{
-    text-align: center;
+    margin-top: 25px;
+    .welcome{
+      font-family: 'Marcellus SC', serif;
+      color: $black;
+      font-size: 1.3em;
+    }
   }
   
   .sign-out{
