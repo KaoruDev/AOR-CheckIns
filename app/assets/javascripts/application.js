@@ -14,8 +14,11 @@
 //= require jquery_ujs
 //= require jquery-ui-1.10.3.custom
 //= require foundation
+//= require moment
+//= require masonry
 //= require underscore
 //= require backbone
+//= require myBackbone
 //= require private_pub
 //= require util
 //= require initializers

@@ -19,7 +19,7 @@
       });
     },
 
-    eventList: function(){
+    eventList: function(data){
       $("#event_date").datepicker({
         // minDate: 0
       });
@@ -33,6 +33,17 @@
         e.preventDefault();
         $("#myModal").foundation("reveal", "close");
       });
+    },
+
+    masonry: function(container){      
+      for(var i = 0; i < container.length; i++){
+        window.msnry = new Masonry( container[i], {
+          columnWidth: 300,
+          gutter: 10,
+          itemSelector: ".event-details"
+        })
+        msnry.layout();
+      }
     },
 
     addUser: function(data){

@@ -12,13 +12,12 @@ $white: #fff;
 
 body{
   background-color: $primary;
-  padding: 10px;
+  border: $primary 10px solid;
 }
 
 .main-content{
   background-color: $white;
   padding: 10px;
-  min-height: 700px;
 }
 
 h1, h2, h3, h4, h5{
@@ -49,7 +48,7 @@ h1, h2, h3, h4, h5{
 
 .login-button{
   margin: 0 auto;
-  width: 290px;
+  max-width: 220px;
   background-color: $primary;
   border-radius: 5px;
   border: $black 2px solid;
@@ -66,11 +65,8 @@ h1, h2, h3, h4, h5{
   }
   .twitter-icon{
     border-right: 1px solid $black;
-    font-size: 2em;
-    padding-top: 10px;
-  }
-  .login-text{
     font-size: 1.3em;
+    padding-top: 10px;
   }
 
   a:hover div{

@@ -1,0 +1,21 @@
+.event-details{
+  text-align: center;
+  margin: 10px 0;
+  border: 2px $black solid;
+  border-radius: 5px;
+  padding: 10px;
+  min-width: 240px;
+}
+
+.event-date{
+  font-size: 1.5em;
+}
+
+.event-title{
+  font-size: 2.5em;
+  margin-bottom: 5px;
+}
+
+.event-address{
+  margin: 10px 0;
+}

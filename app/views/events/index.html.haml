@@ -1,31 +1,17 @@
+-if @events[:current_events].count > 0
+  %h3 Today's events
+  .masonry-container
+    =render "event_list", :events => @events[:current_events]
+  
+-if @events[:future_events].count > 0
+  %h3 Future events 
+  .masonry-container
+    =render "event_list", :events => @events[:future_events]
 
-%h3 Today's events
--@events[:current_events].each do |event|
-  %p
-    =link_to event.name, event_path(event)
-    =event.street_address
-    =event.date
-    =event.city
-    =event.state
-    =link_to "delete", event_path(event), method: :delete, remote: true
-%h3 Future events
--@events[:future_events].each do |event|
-  %p
-    =link_to event.name, event_path(event)
-    =event.street_address
-    =event.date
-    =event.city
-    =event.state
-    =link_to "delete", event_path(event), method: :delete, remote: true
-%h3 Past events
--@events[:past_events].each do |event|
-  %p
-    =link_to event.name, event_path(event)
-    =event.street_address
-    =event.date
-    =event.city
-    =event.state
-    =link_to "delete", event_path(event), method: :delete, remote: true
+-if @events[:past_events].count > 0   
+  %h3 Past events
+  .masonry-container
+    =render "event_list", :events => @events[:past_events]
 
 =# Only add if admin
 #myModal.reveal-modal.small
@@ -33,4 +19,4 @@
 
 =content_for :javascript do
   :javascript
-    init.eventList();
+    init.masonry($(".masonry-container"))

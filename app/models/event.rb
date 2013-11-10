@@ -5,14 +5,9 @@ class Event < ActiveRecord::Base
   geocoded_by :full_street_address
   after_validation :geocode
 
+  # Returns a hash consisting of 3 arrays, current_event, future_events, and past_events
   def self.update_and_get_all
-    current_events = self.where(current_event: true)
-    self.check_if_event_has_passed current_events
-
-    sort_events self.all
-    # events.sort_by{|x|
-    #   x.date
-    # }.reverse
+    separate_events self.all
   end
   
   def is_user_nearby(longitude, latitude)
@@ -22,6 +17,10 @@ class Event < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def full_street_address
+    "#{self.street_address}  #{self.city},  #{self.state}"
   end
 
 #######################################################
@@ -36,34 +35,42 @@ class Event < ActiveRecord::Base
 
 
   def self.check_if_event_has_passed(events)
-      events.each do |event|
-      if event.date < DateTime.now.beginning_of_day
-        event.current_event = false
-        event.save
-      end
+    events.each do |event|
+
     end
   end
 
-  def self.sort_events(events)
+  def self.separate_events(events)
     results = {
       current_events: [],
       future_events: [],
       past_events: []
     }
+
     events.each do |event|
       if !event.current_event
-        results[:past_events] << event
+        results[:past_events]<< event
       elsif event.date > DateTime.now.at_end_of_day
-        results[:future_events] << event
+        results[:future_events]<< event
+      elsif event.date < DateTime.now.beginning_of_day
+        event.current_event = false
+        event.save
+        results[:past_events]<< event
       else
-        results[:current_events] << event
+        results[:current_events]<< event
       end
     end
+
+    results[:past_events] = sort_by_date results[:past_events]
+    results[:future_event] = sort_by_date results[:future_events]
+
     results
   end
 
-  def full_street_address
-    self.street_address + self.city + self.state
+  def self.sort_by_date(events)
+    events.sort! do |x, y|
+      y.date <=> x.date
+    end
   end
 
   def get_user_distance_from_event(longitude, latitude)
