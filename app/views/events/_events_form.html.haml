@@ -3,26 +3,25 @@
     .columns.large-12
       =f.label :name
       =f.text_field :name
-
   .row
-    .columns.large-4
+    .columns.large-12
       =f.label :date
       =f.text_field :date, value: "#{DateTime.now.to_date}"
   
   .row
-    .columns.large-6
+    .columns.large-12
       =f.label :street_address
       =f.text_field :street_address, value: "700 San Jacinto Blvd."
-    .columns.large-3
+  .row
+    .columns.large-6
       =f.label :city
       =f.text_field :city, value: "Austin"
-    .columns.large-3
+    .columns.large-6
       =f.label :state
       =f.text_field :state, value: "TX"
   .row
-    .columns.large-12
-      =f.submit
-
--content_for :javascript do
-  :javascript
-    $("#event_date").datepicker();
+    .columns.small-6.large-6.left
+      =f.submit class: "button small radius expand"
+    .columns.small-6.large-6.left
+      =button_tag "Close", class: "button small radius expand close-modal"
+    

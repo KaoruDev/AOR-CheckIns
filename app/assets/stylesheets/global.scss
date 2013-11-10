@@ -1,5 +1,61 @@
-$background: #E2E1CC;
+@import url("http://fonts.googleapis.com/css?family=Marcellus+SC");
+
+$primary: #A10303;
+$secondary: #BF0404;
+$black: #000;
+$white: #fff;
 
 body{
-  background-color: $background;
+  background-color: $primary;
+  padding: 10px;
+}
+
+h1, h2, h3, h4, h5{
+  font-family: 'Marcellus SC', serif;
+  color: $white;
+}
+
+.button{
+  transition: background-color 0.2s;
+  transition: color 0.1s;
+  &:hover{
+    background-color: $secondary;
+    color: $white;
+  }
+}
+
+
+//////////////////////////////////////////////////
+//
+//
+//                BANNER / LOGO       
+//
+//
+//////////////////////////////////////////////////
+
+.banner{
+  .logo{
+    width: 200px;
+    margin: 0 auto;
+  }
+  h1{
+    text-align: center;
+    font-size: 3em;
+    margin: 0 auto 10px;
+
+    a{
+      transition: color 0.2s;
+      &:hover{
+        color: #000;
+      }
+    }
+  }
+
+  nav{
+    text-align: center;
+  }
+  
+  .sign-out{
+    margin: 10px;
+  }
 }

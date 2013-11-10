@@ -1,0 +1,11 @@
+.banner
+  .logo
+    =image_tag "AOR-Check-in.png", size: "200"
+  %h1 
+    =link_to "Austin on Rails", root_path
+  %nav
+    -if user_signed_in?
+      %h5 Welcome #{current_user.name}!
+      .sign-out
+        =button_tag "Add Event", class: "add-event radius button"
+        =link_to "Sign out", destroy_user_session_path, method: :delete, class: "button radius"

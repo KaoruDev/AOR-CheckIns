@@ -31,4 +31,4 @@
     =subscribe_to "/messages/#{@event.id}"
 
     :javascript
-      init.geoLocation(#{@event.id}, #{current_user.id})
+      init.pinpoint(#{@event.id}, #{current_user.id})

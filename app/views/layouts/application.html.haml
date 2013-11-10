@@ -17,12 +17,7 @@
     = stylesheet_link_tag  "application"
     = csrf_meta_tags
   %body
-    .row
-      .columns.large-6
-        %h1= link_to "AOR Events", root_path
-      .columns.large-3.large-offset-3
-        -if user_signed_in?
-          =link_to "Sign out", destroy_user_session_path, method: :delete
+    =render "layouts/nav"
        
     .row
       .columns.large-12

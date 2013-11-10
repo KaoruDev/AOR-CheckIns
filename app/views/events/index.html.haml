@@ -1,11 +1,16 @@
-= render "events_form"
-
-
 -@events.each do |event|
   %p
     =link_to event.name, event_path(event)
     =event.street_address
+    =event.date
     =event.city
     =event.state
     =link_to "delete", event_path(event), method: :delete, remote: true
-    %br
+
+=# Only add if admin
+#myModal.reveal-modal.small
+  = render "events_form"
+
+=content_for :javascript do
+  :javascript
+    init.eventList();
