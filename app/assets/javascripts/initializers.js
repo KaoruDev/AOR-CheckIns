@@ -43,7 +43,7 @@
           gutter: 10,
           itemSelector: ".event-details"
         })
-        msnry.layout();
+        init.msnry.layout();
       }
     },
 
