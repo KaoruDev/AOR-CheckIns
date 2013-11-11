@@ -1,11 +1,46 @@
 @import url("http://fonts.googleapis.com/css?family=Marcellus+SC");
 
+//////////////////////////////////////////////////
+//
+//
+//               VARIABLES  
+//
+//
+//////////////////////////////////////////////////
+
 $primary: $primary-color;
 $secondary: #590202;
 $tertiary: #BF0404;
 $black: #000;
 $white: #fff;
 
+//////////////////////////////////////////////////
+//
+//
+//                  MIXINS   
+//
+//
+//////////////////////////////////////////////////
+
+@mixin breakpoint($point) {
+  @if $point == papa-bear {
+    // Medium-screen is set in foundation.
+    @media all and (min-width: 1000px) { @content; }
+  }
+  @else if $point == mama-bear {
+    // Small-screen ise t in foundation.
+    @media all and (min-width: 720px)  { @content; }
+  }
+}
+
+
+//////////////////////////////////////////////////
+//
+//
+//                GLOBAL RESETS  
+//
+//
+//////////////////////////////////////////////////
 *{
   box-sizing: border-box;
 }
@@ -109,5 +144,24 @@ h1, h2, h3, h4, h5{
   
   .sign-out{
     margin: 10px;
+  }
+}
+
+//////////////////////////////////////////////////
+//
+//
+//               MASONRY GRID SIZER   
+//
+//
+//////////////////////////////////////////////////
+
+
+.grid-sizer{
+  width: 100%;
+  @include breakpoint(mama-bear){
+    width: 30%;
+  }
+  @include breakpoint(papa-bear){
+    width: 24%;
   }
 }

@@ -39,9 +39,9 @@
     masonry: function(container){      
       for(var i = 0; i < container.length; i++){
         init.msnry = new Masonry( container[i], {
-          columnWidth: 300,
+          columnWidth: $('.grid-sizer')[0],
           gutter: 10,
-          itemSelector: ".event-details"
+          itemSelector: ".brick"
         })
         init.msnry.layout();
       }
@@ -49,10 +49,12 @@
 
     addUser: function(data){
       if(data){
-        var newHTML = _.getTemplate("bricks")(data);
-        $(".attendees").prepend(newHTML);
+        var newHTML = $(_.getTemplate("bricks")(data));
+        var frag = document.createDocumentFragment();
+        frag.appendChild(newHTML[0]);
 
-        init.msnry.prepended(newHTML);
+        $(".attendees").prepend(frag);
+        init.msnry.prepended($(newHTML));
       }
     }
   }
