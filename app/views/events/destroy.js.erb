@@ -1,6 +1,8 @@
 $(document).on("ajax:success", function(e, data){
-  init.msnry.remove($(e.target).parent().parent()[0])
-  init.msnry.layout();
+  for(var i = 0; i < init.msnry.length; i++){
+    init.msnry[i].remove($(e.target).parent().parent()[0])
+    init.msnry[i].layout();
+  }
   $(e.target).parent().parent().remove();
   $(document).unbind("ajax:success");
 });

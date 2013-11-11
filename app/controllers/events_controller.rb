@@ -17,7 +17,6 @@ class EventsController < ApplicationController
     @event.save
 
     redirect_to root_path
-    
   end
 
   def destroy

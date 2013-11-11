@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   has_many :users, :through => :check_ins
   
   geocoded_by :full_street_address
-  after_validation :geocode
+  after_validation :geocode, :set_timezone
 
   # Returns a hash consisting of 3 arrays, current_event, future_events, and past_events
   def self.update_and_get_all
@@ -21,6 +21,10 @@ class Event < ActiveRecord::Base
 
   def full_street_address
     "#{self.street_address}  #{self.city},  #{self.state}"
+  end
+
+  def set_timezone
+    self.timezone = Eztz.timezone(lat: self.latitude, lng: self.longitude).timeZoneId
   end
 
 #######################################################
@@ -46,18 +50,17 @@ class Event < ActiveRecord::Base
       future_events: [],
       past_events: []
     }
-
     events.each do |event|
       if !event.current_event
-        results[:past_events]<< event
-      elsif event.date > DateTime.now.at_end_of_day
-        results[:future_events]<< event
-      elsif event.date < DateTime.now.beginning_of_day
+        results[:past_events] << event
+      elsif is_event_in_the_future? event
+        results[:future_events] << event
+      elsif is_event_before_today? event
         event.current_event = false
         event.save
-        results[:past_events]<< event
+        results[:past_events] << event
       else
-        results[:current_events]<< event
+        results[:current_events] << event
       end
     end
 
@@ -65,6 +68,14 @@ class Event < ActiveRecord::Base
     results[:future_event] = sort_by_date results[:future_events]
 
     results
+  end
+
+  def self.is_event_in_the_future?(event)
+    event.date > DateTime.now.at_end_of_day.in_time_zone(event.timezone)
+  end
+
+  def self.is_event_before_today?(event)
+    event.date < DateTime.now.beginning_of_day.in_time_zone(event.timezone)
   end
 
   def self.sort_by_date(events)

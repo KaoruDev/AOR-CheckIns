@@ -36,14 +36,16 @@
       });
     },
 
-    masonry: function(container){      
+    msnry: [],
+
+    masonry: function(container){
       for(var i = 0; i < container.length; i++){
-        init.msnry = new Masonry( container[i], {
+        init.msnry.push(new Masonry( container[i], {
           columnWidth: $('.grid-sizer')[0],
           gutter: 10,
           itemSelector: ".brick"
-        })
-        init.msnry.layout();
+        }))
+        init.msnry[init.msnry.length - 1].layout();
       }
     },
 

@@ -62,6 +62,7 @@ gem "omniauth-twitter"
 
 gem "geocoder"
 gem "chronic"
+gem "eztz"
 
 gem "private_pub"
 gem "thin"
