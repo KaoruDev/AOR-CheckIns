@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   has_many :users, :through => :check_ins
   
   geocoded_by :full_street_address
-  after_validation :geocode, :set_timezone
+  after_validation :geocode, :set_timezone_and_date
 
   # Returns a hash consisting of 3 arrays, current_event, future_events, and past_events
   def self.update_and_get_all
@@ -23,8 +23,10 @@ class Event < ActiveRecord::Base
     "#{self.street_address}  #{self.city},  #{self.state}"
   end
 
-  def set_timezone
+  def set_timezone_and_date
     self.timezone = Eztz.timezone(lat: self.latitude, lng: self.longitude).timeZoneId
+    self.date = self.date.in_time_zone(self.timezone);
+    binding.pry
   end
 
 #######################################################
