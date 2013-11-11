@@ -31,6 +31,9 @@ $white: #fff;
     // Small-screen ise t in foundation.
     @media all and (min-width: 720px)  { @content; }
   }
+  @else if $point == baby-bear{
+    @media all and (min-width: 290px) { @content; }
+  }
 }
 
 
@@ -99,13 +102,27 @@ h1, h2, h3, h4, h5{
     padding: 15px;
   }
   .twitter-icon{
-    border-right: 1px solid $black;
-    font-size: 1.3em;
-    padding-top: 10px;
+    display:none;
+
+    @include breakpoint(baby-bear){
+      border-right: 1px solid $black;
+      font-size: 1.3em;
+      padding-top: 10px;
+      display:inline-block;
+    }
   }
 
   a:hover div{
     color: $primary;
+  }
+
+  .login-text{
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    @include breakpoint(baby-bear){
+      width: auto;
+    }
   }
 }
 
