@@ -72,11 +72,11 @@ class Event < ActiveRecord::Base
   end
 
   def self.is_event_in_the_future?(event)
-    event.date > DateTime.now.at_end_of_day.in_time_zone(event.timezone)
+    event.date > DateTime.now.in_time_zone(event.timezone).at_end_of_day
   end
 
   def self.is_event_before_today?(event)
-    event.date < DateTime.now.beginning_of_day.in_time_zone(event.timezone)
+    event.date < DateTime.now.in_time_zone(event.timezone).beginning_of_day
   end
 
   def self.sort_by_date(events)
