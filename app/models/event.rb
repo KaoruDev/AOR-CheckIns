@@ -26,7 +26,6 @@ class Event < ActiveRecord::Base
   def set_timezone_and_date
     self.timezone = Eztz.timezone(lat: self.latitude, lng: self.longitude).timeZoneId
     self.date = self.date.in_time_zone(self.timezone);
-    binding.pry
   end
 
 #######################################################
