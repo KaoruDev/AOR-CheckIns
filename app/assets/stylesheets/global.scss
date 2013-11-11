@@ -82,7 +82,7 @@ h1, h2, h3, h4, h5{
 
 
 .login-button{
-  margin: 0 auto;
+  margin: 20px auto;
   max-width: 220px;
   background-color: $primary;
   border-radius: 5px;
@@ -123,9 +123,13 @@ h1, h2, h3, h4, h5{
   text-align: center;
 
   h1{
-    font-size: 3em;
+    font-size: 2em;
     display: inline;
-    transition: color .2s
+    transition: color .2s;
+
+    @include breakpoint(mama-bear){
+      font-size: 3em;
+    }
   }
 
   a:hover h1{
