@@ -12,12 +12,11 @@
       .row
         .columns.small-3
           =image_tag attendee.avatar
-        .columns.small-9f
+        .columns.small-9
           =attendee.name
           %br
-          =attendee.twitter_handle
           %br
-          =link_to "Follow", "https://twitter.com/intent/user?screen_name=#{attendee.twitter_handle}"
+          =link_to "Follow", "https://twitter.com/intent/user?screen_name=#{attendee.twitter_handle}", class: "follow-attendee button small expand radius"
 #templates
   %script.bricks{:type => "text/template"}
     .brick.attendee

@@ -1,3 +1,11 @@
+%nav
+  -if user_signed_in?
+    %span.welcome Welcome #{current_user.name}!
+    .sign-out
+      =button_tag "Add Event", class: "add-event radius button"
+      =link_to "Sign out", destroy_user_session_path, method: :delete, class: "button radius"
+
+      
 -if @events[:current_events].count > 0
   %h3 Today's events
   .masonry-container

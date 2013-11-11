@@ -131,20 +131,20 @@ h1, h2, h3, h4, h5{
   a:hover h1{
     color: $black;
   }
-  
+}
 
-  nav{
-    margin-top: 25px;
-    .welcome{
-      font-family: 'Marcellus SC', serif;
-      color: $black;
-      font-size: 1.3em;
-    }
+nav{
+  margin-top: 25px;
+  text-align: center;
+  .welcome{
+    font-family: 'Marcellus SC', serif;
+    color: $black;
+    font-size: 1.3em;
   }
-  
-  .sign-out{
-    margin: 10px;
-  }
+}
+
+.sign-out{
+  margin: 10px;
 }
 
 //////////////////////////////////////////////////
