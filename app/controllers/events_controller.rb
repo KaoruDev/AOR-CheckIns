@@ -28,16 +28,16 @@ class EventsController < ApplicationController
     if @event.is_user_nearby(params[:longitude], params[:latitude])
       respond_to do |format|
         format.json{
-          @user = User.find(params[:user_id])
+          user = User.find(params[:user_id])
           # check_in = @event.check_ins.build(user_id: params[:user_id])
           # check_in.save
           data = {
-            avatar: @user.avatar,
-            name: @user.name,
-            twitter_handle: @user.twitter_handle
+            avatar: user.avatar,
+            name: user.name,
+            twitter_handle: user.twitter_handle
           }
           render :json => data
-          PrivatePub.publish_to("/messages/#{@event.id}", "alert('I see you!');")
+          PrivatePub.publish_to("/messages/#{@event.id}", "init.addUser(#{user.to_json})");
         }
       end
     end

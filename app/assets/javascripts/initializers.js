@@ -38,7 +38,7 @@
 
     masonry: function(container){      
       for(var i = 0; i < container.length; i++){
-        window.msnry = new Masonry( container[i], {
+        init.msnry = new Masonry( container[i], {
           columnWidth: 300,
           gutter: 10,
           itemSelector: ".event-details"
@@ -50,7 +50,9 @@
     addUser: function(data){
       if(data){
         var newHTML = _.getTemplate("bricks")(data);
-        $(".attendees").append(newHTML);
+        $(".attendees").prepend(newHTML);
+
+        init.msnry.prepended(newHTML);
       }
     }
   }
