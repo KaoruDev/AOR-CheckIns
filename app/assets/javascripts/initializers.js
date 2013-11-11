@@ -14,6 +14,7 @@
             latitude: latitude
           },
           success: function(){
+            
           }
         })
       });

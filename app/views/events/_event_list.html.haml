@@ -3,7 +3,7 @@
     .event-title
       =link_to event.name, event_path(event)
     .event-date
-      =event.date.strftime("%b %d %Y")
+      =event.date.strftime("%b %d, %Y")
     .event-address
       =event.full_street_address
     .event-delete
