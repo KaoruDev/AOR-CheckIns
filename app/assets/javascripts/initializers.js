@@ -34,6 +34,8 @@
         e.preventDefault();
         $("#myModal").foundation("reveal", "close");
       });
+
+      $("#event_date").val(moment().format("l"))
     },
 
     msnry: [],
