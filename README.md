@@ -13,7 +13,7 @@ Uses **DEVISE/OMNITAUTH** for Twitter log-in.
 
 ## Styling
 
-[Foundation](https://github.com/zurb/foundation-rails) is responsible for fluid mobile design.
+[Foundation](https://github.com/zurb/foundation-rails) is responsible for mobile design. [Masonry](http://masonry.desandro.com/) is used for the animation.
 10.8.13 MVP Design, still needs to design everything out.
 
 ## Rails Setup
