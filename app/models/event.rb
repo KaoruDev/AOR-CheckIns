@@ -20,7 +20,7 @@ class Event < ActiveRecord::Base
   end
 
   def full_street_address
-    "#{self.street_address}  #{self.city},  #{self.state}"
+    "#{self.street_address} #{self.city}, #{self.state}"
   end
 
   def set_timezone_and_date
@@ -66,7 +66,7 @@ class Event < ActiveRecord::Base
     end
 
     results[:past_events] = sort_by_date results[:past_events]
-    results[:future_event] = sort_by_date results[:future_events]
+    results[:future_events] = sort_by_date results[:future_events]
 
     results
   end

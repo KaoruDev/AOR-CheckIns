@@ -42,7 +42,7 @@ group :development do
   gem "html2haml"
 end
 
-group :test do
+group :development, :test do
   gem "rspec-rails"
 end
 
@@ -64,7 +64,6 @@ gem "eztz"
 
 gem "private_pub"
 gem "thin"
-
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
