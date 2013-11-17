@@ -54,11 +54,9 @@ gem "haml"
 gem "zurb-foundation"
 gem "font-awesome-rails"
 
-
 gem "devise"
 gem "omniauth"
 gem "omniauth-twitter"
-
 
 gem "geocoder"
 gem "chronic"

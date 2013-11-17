@@ -58,7 +58,7 @@
         frag.appendChild(newHTML[0]);
 
         $(".attendees").prepend(frag);
-        init.msnry.prepended($(newHTML));
+        init.msnry[0].prepended($(newHTML));
       }
     }
   }
