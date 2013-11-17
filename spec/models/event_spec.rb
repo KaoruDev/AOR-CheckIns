@@ -28,5 +28,19 @@ describe Event do
       expect(Event.update_and_get_all).to eq({current_events:[current_event], past_events:[past_event], future_events:[future_event]})
     end
 
+    describe ".full_street_address" do
+      it "returns a string with full street address" do
+        past_event
+        expect(past_event.full_street_address).to eq("716 Congress Austin, TX")
+      end
+    end
+
+    describe ".set_timezone_and_date" do
+      it "sets the timezone and date based on the location of the event" do
+        past_event
+        expect(past_event.timezone).to eq("America/Chicago")
+      end
+    end
+
   end
 end
