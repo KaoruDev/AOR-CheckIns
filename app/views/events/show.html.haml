@@ -1,27 +1,28 @@
-=render "layouts/nav"
+=content_for :waterfall do
+  =render "layouts/nav"
 
-.single-event-details
-  .single-event-title
-    =@event.name
-  .single-event-date
-    =@event.date.strftime("%b %d, %Y")
+  .single-event-details
+    .single-event-title
+      =@event.name
+    .single-event-date
+      =@event.date.strftime("%b %d, %Y")
 
-%h3 Attendees
-.attendees
+  %h3 Attendees
+  .attendees
   
-#templates
-  %script.check-ins{:type => "text/template"}
-    .attendee
-      %img{src: "{{ avatar }}"}
-      %strong.attendee-name {{ name }}
-      %br
-      %br
-      %a{href: "https://twitter.com/intent/user?screen_name={{ twitter_handle }}", class: "follow-attendee button small expand radius"} Follow
-      
 =content_for :javascript do
+  #templates
+    %script.check-ins{:type => "text/template"}
+      .attendee
+        %img{src: "{{ avatar }}"}
+        %strong.attendee-name {{ name }}
+        %br
+        %br
+        %a{href: "https://twitter.com/intent/user?screen_name={{ twitter_handle }}", class: "follow-attendee button small expand radius"} Follow @{{ twitter_handle }}
+
+
   -if can_user_check_in
     =subscribe_to "/messages/#{@event.id}"
 
     :javascript
       init.pinpoint(#{@event.id}, #{current_user.id})
-      init.masonry($(".attendees"));

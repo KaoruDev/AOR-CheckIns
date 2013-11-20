@@ -22,6 +22,7 @@
       .row
         .columns.large-12
           = yield
+      = yield :waterfall
           
     = javascript_include_tag "vendor/custom.modernizr"
     = javascript_include_tag "application"
