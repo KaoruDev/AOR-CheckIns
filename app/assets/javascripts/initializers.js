@@ -53,12 +53,8 @@
 
     addUser: function(data){
       if(data){
-        var newHTML = $(_.getTemplate("bricks")(data));
-        var frag = document.createDocumentFragment();
-        frag.appendChild(newHTML[0]);
-
-        $(".attendees").prepend(frag);
-        init.msnry[0].prepended($(newHTML));
+        var newHTML = $(_.getTemplate("check-ins")(data));
+        $(".attendees").prepend(newHTML);
       }
     }
   }
