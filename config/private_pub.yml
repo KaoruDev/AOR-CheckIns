@@ -5,6 +5,9 @@ test:
   server: "http://localhost:9292/faye"
   secret_token: "secret"
 production:
-  server: "http://Kaoru-Faye.herokuapp.com/faye"
-  secret_token: "9E565FE1588E972D7453FC199262136DA9C8EA245B5A57B865CE19CB2B"
-  signature_expiration: 86400 # one day
+  server: "http://localhost:9292/faye"
+  secret_token: "secret"
+# production:
+#   server: "http://Kaoru-Faye.herokuapp.com/faye"
+#   secret_token: "9E565FE1588E972D7453FC199262136DA9C8EA245B5A57B865CE19CB2B"
+#   signature_expiration: 86400 # one day
