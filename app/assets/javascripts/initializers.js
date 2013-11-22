@@ -12,8 +12,13 @@
             longitude: longitude,
             latitude: latitude
           },
-          success: function(){
-            
+          success: function(data){
+            console.log(data)
+            if(data.atEvent){
+              // alert("Great you're checked in!");
+            }else{
+              alert("Sorry you're not at the event yet!");
+            }
           }
         })
       });

@@ -31,8 +31,11 @@ class EventsController < ApplicationController
           # check_in = @event.check_ins.build(user_id: params[:user_id])
           # check_in.save
           PrivatePub.publish_to("/messages/#{@event.id}", "init.addUser(#{user.to_json})");
+          render :json => {atEvent: true}
         }
       end
+    else
+      render :json => { atEvent: false }
     end
   end
 
