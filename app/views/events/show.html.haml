@@ -1,14 +1,17 @@
 =content_for :waterfall do
   .waterfall
-    .single-event-details
-      =render "layouts/nav"
-      .single-event-title
-        =@event.name
-      .single-event-date
-        =@event.date.strftime("%b %d, %Y")
+    =render "layouts/nav"
+    =if current_user.is_admin
+      %span show options
     
     .waterfall-body
+      %h2 Austin on Rails
       %h3 Attendees
+      .single-event-details
+        .single-event-title
+          =@event.name
+        .single-event-date
+          =@event.date.strftime("%b %d, %Y")
       .attendees
   
 =content_for :javascript do
