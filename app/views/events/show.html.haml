@@ -1,7 +1,7 @@
 =content_for :waterfall do
-  =render "layouts/nav"
   .waterfall
     .single-event-details
+      =render "layouts/nav"
       .single-event-title
         =@event.name
       .single-event-date
@@ -20,10 +20,13 @@
             %img{src: "{{ avatar }}"}
           .info
             .attendee-name {{ name }}
-            .twitter-icon
-              %i.fa.fa-twitter-square
-            .twitter-handle
-              %strong {{ twitter_handle }}
+            .twitter-contact
+              .twitter-icon
+                %i.fa.fa-twitter-square
+              .twitter-handle
+                %strong {{ twitter_handle }}
+            .bio
+              {{ bio }}
 
 
   -if can_user_check_in

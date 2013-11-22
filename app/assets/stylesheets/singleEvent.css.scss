@@ -1,8 +1,19 @@
 .waterfall{
+  @include clearfix;
+
+  @include breakpoint(papa-bear){
+    width: 99%;
+    margin: 0 auto;
+  }
   .single-event-details{
     font-family: 'Marcellus SC', serif;
     margin: 10px 0;
     text-align: center;
+    @include breakpoint(papa-bear){
+      float: left;
+      margin-right: 30px;
+      width: 20%;
+    }
   }
     .single-event-title{
       font-size: 1.7em;
@@ -15,17 +26,33 @@
 .waterfall-body{
   h3{
     text-align: center;
+    @include breakpoint(papa-bear){
+      font-size: 3em;
+    }
+  }
+  @include breakpoint(papa-bear){
+    float: left;
+    width: 75%;
   }
 }
 
 .follow-attendee{
   display: block;
+  border-radius: 15px;
+  &:hover{
+    background: $primary;
+    color: $white;
+  }
+
+  @include breakpoint(mama-bear){
+    margin: 25px auto;
+  }
 }
 
 .attendee{
   @include clearfix;
   margin: 20px 0;
-  border: 1px solid $primary;
+  border: 3px solid $primary;
   padding: 10px;
   border-radius: 15px;
 
@@ -35,27 +62,45 @@
     img{
       width: 50px;
       margin-right: 10px;
+
+      @include breakpoint(baby-bear){
+        width: 100px;
+      }
+      @include breakpoint(mama-bear){
+        width: 150px;
+      }
     }
   }
 
   .info{
     float: left;
     font-size: 1.2em;
+    max-width: 75%;
+    @include breakpoint(baby-bear){
+      font-size: 1.5em;
+    }
+    .bio{
+      display: none;
+      @include breakpoint(mama-bear){
+        display: block;
+      }
+    }
   }
 
-  .attendee-name{
-    margin-bottom: 3px;
-  }
+    .attendee-name{
+      margin-bottom: 3px;
+    }
 
-  .twitter-icon{
-    font-size: 1.5em;
-    float:left;
-  }
-  .twitter-handle{
-    float:left;
-    margin: 4px;
-  }
+    .twitter-contact{
+      @include clearfix;
+    }
 
-
-  
+    .twitter-icon{
+      float: left;
+      font-size: 1.5em;
+    }
+    .twitter-handle{
+      float: left;
+      margin: 5px;
+    }
 }

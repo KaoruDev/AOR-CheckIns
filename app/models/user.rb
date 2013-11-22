@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
       user = User.create(name:auth.extra.raw_info.name,
                            provider:auth.provider,
                            uid:auth.uid,
-                           avatar: auth[:info][:image],
+                           bio: auth[:info][:description],
+                           avatar: auth[:info][:image].tap { |s| s.slice!("_normal") },
                            twitter_handle: auth[:extra][:raw_info][:screen_name],
                            email:"#{auth.uid}@twitter.com",
                            password:Devise.friendly_token[0,20]
@@ -24,6 +25,7 @@ class User < ActiveRecord::Base
     # Update changes user made on twitter profile
     if did_user_update_info(user, auth)
       user.twitter_handle = auth[:extra][:raw_info][:screen_name]
+      user.bio = auth[:info][:description]
       user.save
     end
 
@@ -34,7 +36,7 @@ class User < ActiveRecord::Base
   private
 
   def self.did_user_update_info(user, auth)
-    user.twitter_handle != auth[:extra][:raw_info][:screen_name]
+    user.twitter_handle != auth[:extra][:raw_info][:screen_name] && user.bio != auth[:info][:description]
   end
 
 end

@@ -30,11 +30,6 @@ class EventsController < ApplicationController
           user = User.find(params[:user_id])
           # check_in = @event.check_ins.build(user_id: params[:user_id])
           # check_in.save
-          data = {
-            avatar: user.avatar,
-            name: user.name,
-            twitter_handle: user.twitter_handle
-          }
           PrivatePub.publish_to("/messages/#{@event.id}", "init.addUser(#{user.to_json})");
         }
       end
