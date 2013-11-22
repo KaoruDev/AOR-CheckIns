@@ -1,0 +1,61 @@
+.waterfall{
+  .single-event-details{
+    font-family: 'Marcellus SC', serif;
+    margin: 10px 0;
+    text-align: center;
+  }
+    .single-event-title{
+      font-size: 1.7em;
+    }
+    .single-event-date{
+      font-size: 1.3em;
+    }
+}
+
+.waterfall-body{
+  h3{
+    text-align: center;
+  }
+}
+
+.follow-attendee{
+  display: block;
+}
+
+.attendee{
+  @include clearfix;
+  margin: 20px 0;
+  border: 1px solid $primary;
+  padding: 10px;
+  border-radius: 15px;
+
+  .avatar{
+    float: left;
+
+    img{
+      width: 50px;
+      margin-right: 10px;
+    }
+  }
+
+  .info{
+    float: left;
+    font-size: 1.2em;
+  }
+
+  .attendee-name{
+    margin-bottom: 3px;
+  }
+
+  .twitter-icon{
+    font-size: 1.5em;
+    float:left;
+  }
+  .twitter-handle{
+    float:left;
+    margin: 4px;
+  }
+
+
+  
+}

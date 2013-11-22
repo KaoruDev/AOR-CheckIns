@@ -35,7 +35,6 @@ class EventsController < ApplicationController
             name: user.name,
             twitter_handle: user.twitter_handle
           }
-          render :json => data
           PrivatePub.publish_to("/messages/#{@event.id}", "init.addUser(#{user.to_json})");
         }
       end

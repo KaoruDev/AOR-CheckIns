@@ -5,7 +5,6 @@
       navigator.geolocation.getCurrentPosition(function(pos){
         var longitude = (pos.coords.longitude);
         var latitude = (pos.coords.latitude);
-
         $.ajax({
           url: event_id + "/check-in/" + user_id,
           type: "POST",

@@ -52,7 +52,7 @@ end
 
 gem "haml"
 gem "zurb-foundation"
-gem "font-awesome-rails"
+gem "font-awesome-sass"
 
 gem "devise"
 gem "omniauth"

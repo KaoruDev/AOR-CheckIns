@@ -32,7 +32,20 @@ $white: #fff;
     @media all and (min-width: 720px)  { @content; }
   }
   @else if $point == baby-bear{
-    @media all and (min-width: 290px) { @content; }
+    @media all and (min-width: 400px) { @content; }
+  }
+}
+
+@mixin clearfix{
+  &:before, &:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+
+  &:after {
+      clear: both;
   }
 }
 
@@ -142,6 +155,10 @@ h1, h2, h3, h4, h5{
     font-size: 2em;
     display: inline;
     transition: color .2s;
+
+    @include breakpoint(baby-bear){
+      font-size: 2.5em;
+    }
 
     @include breakpoint(mama-bear){
       font-size: 3em;

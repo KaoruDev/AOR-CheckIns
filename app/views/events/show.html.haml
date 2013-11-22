@@ -1,24 +1,29 @@
 =content_for :waterfall do
   =render "layouts/nav"
-
-  .single-event-details
-    .single-event-title
-      =@event.name
-    .single-event-date
-      =@event.date.strftime("%b %d, %Y")
-
-  %h3 Attendees
-  .attendees
+  .waterfall
+    .single-event-details
+      .single-event-title
+        =@event.name
+      .single-event-date
+        =@event.date.strftime("%b %d, %Y")
+    
+    .waterfall-body
+      %h3 Attendees
+      .attendees
   
 =content_for :javascript do
   #templates
     %script.check-ins{:type => "text/template"}
-      .attendee
-        %img{src: "{{ avatar }}"}
-        %strong.attendee-name {{ name }}
-        %br
-        %br
-        %a{href: "https://twitter.com/intent/user?screen_name={{ twitter_handle }}", class: "follow-attendee button small expand radius"} Follow @{{ twitter_handle }}
+      %a{href: "https://twitter.com/intent/user?screen_name={{ twitter_handle }}", class: "follow-attendee"} 
+        .attendee
+          .avatar
+            %img{src: "{{ avatar }}"}
+          .info
+            .attendee-name {{ name }}
+            .twitter-icon
+              %i.fa.fa-twitter-square
+            .twitter-handle
+              %strong {{ twitter_handle }}
 
 
   -if can_user_check_in
