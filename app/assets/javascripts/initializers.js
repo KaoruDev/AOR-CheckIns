@@ -60,6 +60,11 @@
         var newHTML = $(_.getTemplate("check-ins")(data));
         $(".attendees").prepend(newHTML);
       }
+    },
+
+    waterfall: function(e){
+      e.preventDefault();
+      console.log("beginning waterfall")
     }
   }
 })();

@@ -150,7 +150,9 @@ h1, h2, h3, h4, h5{
     }
 
     @include breakpoint(mama-bear){
+      display: block;
       font-size: 3em;
+      height: 25px;
     }
     
     @include breakpoint(papa-bear){

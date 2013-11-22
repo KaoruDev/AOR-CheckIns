@@ -1,10 +1,5 @@
 .waterfall{
   @include clearfix;
-  .banner{
-    @include breakpoint(papa-bear){
-      float: left;
-    }
-  }
 
   @include breakpoint(papa-bear){
     width: 99%;
@@ -24,6 +19,19 @@
     }
 }
 
+
+.waterfall-nav{
+  @include breakpoint(papa-bear){
+    float: left;
+  }
+
+  .button{
+    display: block;
+    margin: 20px auto;
+  }
+}
+
+
 .waterfall-body{
   @include breakpoint(papa-bear){
     float: left;
@@ -33,19 +41,20 @@
 
   h2{
     display: none;
-    margin: 0 auto;
     @include breakpoint(papa-bear){
       display: block;
       text-align: center;
       font-size: 3.5em;
       margin-bottom: 0;
+      height: 63px;
     }
   }
 
   h3{
+    font-size: 2em;
     text-align: center;
     @include breakpoint(papa-bear){
-      font-size: 3em;
+      font-size: 2em;
       margin-top: 0;
     }
   }

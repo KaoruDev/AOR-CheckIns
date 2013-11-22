@@ -1,8 +1,9 @@
 =content_for :waterfall do
   .waterfall
-    =render "layouts/nav"
-    =if current_user.is_admin
-      %span show options
+    .waterfall-nav
+      =render "layouts/nav"
+      -if true #current_user.is_admin
+        %button.button.radius.animation Animate!
     
     .waterfall-body
       %h2 Austin on Rails
@@ -31,6 +32,9 @@
             .bio
               {{ bio }}
 
+  -if true #current_user.is_admin
+    :javascript
+      $(".animation").on("click", init.waterfall);
 
   -if can_user_check_in
     =subscribe_to "/messages/#{@event.id}"
