@@ -13,9 +13,8 @@
             latitude: latitude
           },
           success: function(data){
-            console.log(data)
             if(data.atEvent){
-              // alert("Great you're checked in!");
+              // alert("Welcome to Austin on Rails!");
             }else{
               alert("Sorry you're not at the event yet!");
             }
@@ -57,14 +56,23 @@
 
     addUser: function(data){
       if(data){
-        var newHTML = $(_.getTemplate("check-ins")(data));
-        $(".attendees").prepend(newHTML);
+        for(var i = 0; i < 12; i++){
+          var newHTML = $(_.getTemplate("check-ins")(data));
+          $(".attendees").prepend(newHTML);
+        };
       }
     },
 
     waterfall: function(e){
       e.preventDefault();
-      console.log("beginning waterfall")
+      console.log("hello!")
+      $(".main-content").css({
+        height: window.innerHeight - 20
+      });
+      $(".attendees").css({
+        position: "fixed",
+        bottom: -100
+      });
     }
   }
 })();

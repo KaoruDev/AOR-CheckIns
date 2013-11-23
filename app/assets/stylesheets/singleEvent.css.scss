@@ -19,24 +19,22 @@
     }
 }
 
-
 .waterfall-nav{
   @include breakpoint(papa-bear){
     float: left;
   }
 
-  .button{
+  .animate{
     display: block;
-    margin: 20px auto;
+    margin: auto;
   }
 }
 
-
 .waterfall-body{
+
   @include breakpoint(papa-bear){
-    float: left;
-    margin-left: 30px;
-    width: 75%;
+    float: right;
+    width: 74%;
   }
 
   h2{
@@ -47,6 +45,9 @@
       font-size: 3.5em;
       margin-bottom: 0;
       height: 63px;
+    }
+    &:hover{
+      color: $black;
     }
   }
 
@@ -60,49 +61,50 @@
   }
 }
 
+.attendees{
+  @include clearfix;
+}
+
 .follow-attendee{
   display: block;
   border-radius: 15px;
+  margin: 20px 0;
+
   &:hover{
     background: $primary;
     color: $white;
   }
 
   @include breakpoint(mama-bear){
-    margin: 25px auto;
+    margin: 10px;
+    width: 47%;
+    float: left;
   }
 }
 
 .attendee{
   @include clearfix;
-  margin: 20px 0;
   border: 3px solid $primary;
   padding: 10px;
   border-radius: 15px;
 
   .avatar{
     float: left;
+    margin-right: 10px;
+    width: 50px;
 
-    img{
-      width: 50px;
-      margin-right: 10px;
-
-      @include breakpoint(baby-bear){
-        width: 100px;
-      }
-      @include breakpoint(mama-bear){
-        width: 150px;
-      }
+    @include breakpoint(baby-bear){
+      width: 100px;
+    }
+    @include breakpoint(mama-bear){
+      width: 30%;
     }
   }
 
   .info{
     float: left;
     font-size: 1.2em;
-    max-width: 75%;
-    @include breakpoint(baby-bear){
-      font-size: 1.5em;
-    }
+    max-width: 66%;
     .bio{
       display: none;
       @include breakpoint(mama-bear){

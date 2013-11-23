@@ -75,6 +75,23 @@ h1, h2, h3, h4, h5{
     color: $primary;
   }
 }
+.bezel{
+  height: 10px;
+  width: 100%;
+  position: fixed;
+  background-color: $primary;
+  z-index: 1000;
+}
+
+.bezel-top{
+  @extend .bezel;
+  top: 0;
+}
+
+.bezel-bottom{
+  @extend .bezel;
+  bottom:0;
+}
 
 //////////////////////////////////////////////////
 //
@@ -140,6 +157,10 @@ h1, h2, h3, h4, h5{
 .banner{
   text-align: center;
 
+  @include breakpoint(mama-bear){
+    margin-bottom: 20px;
+  }
+
   h1{
     font-size: 2em;
     display: inline;
@@ -152,12 +173,12 @@ h1, h2, h3, h4, h5{
     @include breakpoint(mama-bear){
       display: block;
       font-size: 3em;
-      height: 25px;
     }
     
     @include breakpoint(papa-bear){
-      display:none;
+      font-size: 2em;
     }
+
   }
 
   a:hover h1{

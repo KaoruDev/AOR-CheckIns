@@ -1,13 +1,7 @@
 =render "layouts/nav"
 %nav
   %span.welcome Welcome #{current_user.name}!
-  .sign-out
-    .row
-      .columns.large-6
-        =button_tag "Add Event", class: "add-event radius button expand"
-      .columns.large-6
-        =link_to "Sign out", destroy_user_session_path, method: :delete, class: "button radius expand"
-
+  =render "layouts/sign_out"
       
 -if @events[:current_events].count > 0
   %h3 Today's events
