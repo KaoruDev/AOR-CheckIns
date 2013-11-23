@@ -57,7 +57,7 @@
     addUser: function(data){
       if(data){
         window.data = data;
-        for(var i = 0; i < 2; i++){
+        for(var i = 0; i < 1; i++){
           var newHTML = $(_.getTemplate("check-ins")(data));
           $(".attendees").prepend(newHTML);
         };
@@ -72,7 +72,7 @@
       });
       $(".attendees").css({
         position: "fixed",
-        bottom: 20
+        top: 20
       });
 
       setTimeout(rotateAttendees, 1000);
@@ -96,11 +96,11 @@ var toggleAnimationButton = function(){
 }
 
 var stopWaterfall = function(){
-  toggleAnimationButton(true);
+  toggleAnimationButton();
 }
 
 var rotateAttendees = function(){
-  if($("attendees").find("follow-attendee").length > 9){
+  if($(".attendees").find(".follow-attendee").length > 7){
     for(var i = 0; i < 2; i++){
       var attendeeBlock = $(".attendees").find(".follow-attendee")[0]
       $(attendeeBlock).remove();
@@ -108,17 +108,19 @@ var rotateAttendees = function(){
     }
   
     $(".attendees").css({
-      bottom: -222
+      top: -222
     })
     $(".attendees").animate({
-      bottom: 20
+      top: 20
     },{
       duration: 1000,
       complete: function(){
         setTimeout(rotateAttendees, 2000);
-        console.log("reset!")
+        console.log("reset!");
       }
     }) 
+  }else{
+    setTimeout(rotateAttendees, 2000);
   }
 }
 

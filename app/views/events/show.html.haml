@@ -8,7 +8,6 @@
           =@event.name
         .single-event-date
           =@event.date.strftime("%b %d, %Y")
-      =render "layouts/sign_out"
       -if true #current_user.is_admin
         %button.button.radius.animate Animate!
     
