@@ -58,26 +58,27 @@
 
     addUser: function(data){
       window.data = data;
-      if(data && animating){
-        var newHTML = $.parseHTML(_.getTemplate("check-ins")(data))[1]
-        var frag = document.createDocumentFragment();
-        frag.appendChild(newHTML);
-        $(".attendees").prepend(frag);
-        init.msnry[0].prepended([newHTML]);
-
-      }else if(data){
-
-        var newHTML = $.parseHTML(_.getTemplate("check-ins")(data))[1]
-        var frag = document.createDocumentFragment();
-        frag.appendChild(newHTML);
-        $(".attendees").append(frag);
+      for(var i = 0; i < 4; i++){
+        if(data && animating){
+          init.msnry[0].prepended(addAttendee(data));
+        }else if(data){
+          addAttendee(data);
+        }
       }
-
     },
 
     waterfall: function(e){
       e.preventDefault();
-      init.msnry[0].prepended($(".follow-attendee"))
+      init.masonry($(".attendees"));
+
+      init.msnry[0].on('removeComplete', function(msnryInstance, removedItems){
+        var frag = document.createDocumentFragment();
+        elem = removedItems[0].element;
+        frag.appendChild(elem);
+        $(".attendees").prepend(frag);
+        init.msnry[0].prepended(elem);
+      });
+
       toggleAnimationButton();
       $(".main-content").css({
         height: window.innerHeight - 20
@@ -104,6 +105,8 @@
     $(".main-content").css({
       height: "100%"
     });
+    init.msnry[0].destroy();
+    init.msnry = [];
   }
 
   var toggleAnimationButton = function(){
@@ -122,46 +125,39 @@
 
   var rotateAttendees = function(){
     if(iswaterfallActive()){
-      // readyBlock();
-      for(var i = 0; i < 2; i++){
-        var attendeeBlock = $(_.last($(".attendees").find(".follow-attendee"))).clone();
-        $(".attendees").prepend(attendeeBlock);
-      }
+      var attendeeBlock = $(_.last($(".attendees").find(".follow-attendee")))[0];
+      init.msnry[0].remove(attendeeBlock);
 
-      // animateBlock();
-      timer.activate();
-
-      
     }else if(animating){
       timer.activate();
     }
 
   }
 
-  var readyBlock = function(){
-    $(".attendees").css({
-      top: -444
-    });
-  }
+  // var readyBlock = function(){
+  //   $(".attendees").css({
+  //     top: -444
+  //   });
+  // }
 
-  var animateBlock = function(){
-    animating = false;
-    $(".attendees").animate(
-      {
-        top: 20
-      },
+  // var animateBlock = function(){
+  //   animating = false;
+  //   $(".attendees").animate(
+  //     {
+  //       top: 20
+  //     },
 
-      {
-        duration: 500,
-        complete: function(){
-          for(var i = 0; i < 2; i++){
-            $(_.last($(".attendees").find(".follow-attendee"))).remove();
-          }
-          animating = true;
-        }
-      }
-    )
-  }
+  //     {
+  //       duration: 500,
+  //       complete: function(){
+  //         for(var i = 0; i < 2; i++){
+  //           $(_.last($(".attendees").find(".follow-attendee"))).remove();
+  //         }
+  //         animating = true;
+  //       }
+  //     }
+  //   )
+  // }
 
 
 /////////////////////  
@@ -174,6 +170,7 @@
   var waterfallActive = false;
 
   var iswaterfallActive = function(){
+    return true;
     if(waterfallActive){
       return true;
     }else if(window.innerHeight + 222 < $(".attendees").height() && animating){
@@ -182,6 +179,14 @@
     }else{
       return false;
     }
-  }
+  };
+
+  var addAttendee = function(data){
+    var newHTML = $.parseHTML(_.getTemplate("check-ins")(data))[1]
+    var frag = document.createDocumentFragment();
+    frag.appendChild(newHTML);
+    $(".attendees").prepend(frag);
+    return newHTML;
+  };
 
 })();
