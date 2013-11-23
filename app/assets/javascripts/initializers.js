@@ -1,4 +1,6 @@
 (function(){
+  var animating = false;
+
   window.init = {
     pinpoint: function(event_id, user_id){
 
@@ -57,10 +59,18 @@
     addUser: function(data){
       if(data){
         window.data = data;
-        for(var i = 0; i < 1; i++){
-          var newHTML = $(_.getTemplate("check-ins")(data));
-          $(".attendees").prepend(newHTML);
-        };
+        var newHTML = $(_.getTemplate("check-ins")(data));
+      
+        if(iswaterfallActive()){
+          $(".attendees").append(newHTML);
+          readyBlock();
+          animateBlock();
+          timer.activate();
+        }else if(animating){
+          
+        }else{
+          $(".attendees").append(newHTML);
+        }
       }
     },
 
@@ -72,56 +82,111 @@
       });
       $(".attendees").css({
         position: "fixed",
-        top: 20
+        bottom: 20
       });
 
-      setTimeout(rotateAttendees, 1000);
+      timer.activate();
     }
   }
 
-var animating = false;
-
-var toggleAnimationButton = function(){
-  if(animating){
-    $(".animate").off("click", stopWaterfall);
-    $(".animate").on("click", init.waterfall);
-    $(".animate").text("Animate!");
-    animating = false;
-  }else{
-    $(".animate").off("click", init.waterfall);
-    $(".animate").on("click", stopWaterfall);
-    $(".animate").text("Stop Animation!");
-    animating = true;
-  }
-}
-
-var stopWaterfall = function(){
-  toggleAnimationButton();
-}
-
-var rotateAttendees = function(){
-  if($(".attendees").find(".follow-attendee").length > 7){
-    for(var i = 0; i < 2; i++){
-      var attendeeBlock = $(".attendees").find(".follow-attendee")[0]
-      $(attendeeBlock).remove();
-      $(".attendees").append(attendeeBlock);
-    }
-  
-    $(".attendees").css({
-      top: -222
-    })
-    $(".attendees").animate({
-      top: 20
-    },{
-      duration: 1000,
-      complete: function(){
-        setTimeout(rotateAttendees, 2000);
-        console.log("reset!");
+  var timer = {
+    activate: function(){
+      this.cancel();
+      this.timeoutID = window.setTimeout(rotateAttendees, 3000);
+    },
+    cancel: function(){
+      if(typeof this.timeoutID == "number"){
+        window.clearTimeout(this.timeoutID);
+        delete this.timeoutID;
       }
-    }) 
-  }else{
-    setTimeout(rotateAttendees, 2000);
+    }
   }
-}
+
+  var stopWaterfall = function(){
+    toggleAnimationButton();
+    $(".main-content").css({
+      height: "100%"
+    });
+    $(".attendees").css({
+      position: "static"
+    });
+  }
+
+  var toggleAnimationButton = function(){
+    if(animating){
+      $(".animate").off("click", stopWaterfall);
+      $(".animate").on("click", init.waterfall);
+      $(".animate").text("Animate!");
+      animating = false;
+    }else{
+      $(".animate").off("click", init.waterfall);
+      $(".animate").on("click", stopWaterfall);
+      $(".animate").text("Stop Animation!");
+      animating = true;
+    }
+  }
+
+  var rotateAttendees = function(){
+    if(iswaterfallActive()){
+      for(var i = 0; i < 2; i++){
+        var attendeeBlock = _.first($(".attendees").find(".follow-attendee"));
+        $(attendeeBlock).remove();
+        $(".attendees").append(attendeeBlock);
+      }
+
+      readyBlock();
+      animateBlock();
+      timer.activate();
+
+      
+    }else if(animating){
+      timer.activate();
+    }
+
+  }
+
+  var readyBlock = function(){
+    $(".attendees").css({
+      bottom: -444
+    });
+  }
+
+  var animateBlock = function(){
+    animating = false;
+    $(".attendees").animate(
+      {
+        bottom: 20
+      },
+
+      {
+        duration: 500,
+        complete: function(){
+          console.log("reset!");
+          animating = true;
+        }
+      }
+    )
+  }
+
+
+/////////////////////  
+//
+//   HELPER FUNCTIONS
+//
+//////////////////////
+
+
+  var waterfallActive = false;
+
+  var iswaterfallActive = function(){
+    if(waterfallActive){
+      return waterfallActive;
+    }else if($(".attendees").find(".follow-attendee").length > 7 && animating){
+      waterfallActive = true;
+      return waterfallActive;
+    }else{
+      return false;
+    }
+  }
 
 })();
