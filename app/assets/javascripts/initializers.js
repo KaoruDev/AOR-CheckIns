@@ -56,7 +56,8 @@
 
     addUser: function(data){
       if(data){
-        for(var i = 0; i < 12; i++){
+        window.data = data;
+        for(var i = 0; i < 2; i++){
           var newHTML = $(_.getTemplate("check-ins")(data));
           $(".attendees").prepend(newHTML);
         };
@@ -65,14 +66,60 @@
 
     waterfall: function(e){
       e.preventDefault();
-      console.log("hello!")
+      toggleAnimationButton();
       $(".main-content").css({
         height: window.innerHeight - 20
       });
       $(".attendees").css({
         position: "fixed",
-        bottom: -100
+        bottom: 20
       });
+
+      setTimeout(rotateAttendees, 1000);
     }
   }
+
+var animating = false;
+
+var toggleAnimationButton = function(){
+  if(animating){
+    $(".animate").off("click", stopWaterfall);
+    $(".animate").on("click", init.waterfall);
+    $(".animate").text("Animate!");
+    animating = false;
+  }else{
+    $(".animate").off("click", init.waterfall);
+    $(".animate").on("click", stopWaterfall);
+    $(".animate").text("Stop Animation!");
+    animating = true;
+  }
+}
+
+var stopWaterfall = function(){
+  toggleAnimationButton(true);
+}
+
+var rotateAttendees = function(){
+  if($("attendees").find("follow-attendee").length > 9){
+    for(var i = 0; i < 2; i++){
+      var attendeeBlock = $(".attendees").find(".follow-attendee")[0]
+      $(attendeeBlock).remove();
+      $(".attendees").append(attendeeBlock);
+    }
+  
+    $(".attendees").css({
+      bottom: -222
+    })
+    $(".attendees").animate({
+      bottom: 20
+    },{
+      duration: 1000,
+      complete: function(){
+        setTimeout(rotateAttendees, 2000);
+        console.log("reset!")
+      }
+    }) 
+  }
+}
+
 })();
