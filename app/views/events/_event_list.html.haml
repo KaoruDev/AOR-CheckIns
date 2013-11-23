@@ -1,11 +1,12 @@
-.grid-sizer
--events.each do |event|
-  .brick.event-details
-    .event-title
-      =link_to event.name, event_path(event)
-    .event-date
-      =event.date.strftime("%b %d, %Y")
-    .event-address
-      =event.full_street_address
-    .event-delete
-      =link_to "delete", event_path(event), method: :delete, remote: true, class: "button radius tiny"
+.masonry-container
+  .grid-sizer
+  -events.each do |event|
+    .brick.event-details
+      .event-title
+        =link_to event.name, event_path(event)
+      .event-date
+        =event.date.strftime("%b %d, %Y")
+      .event-address
+        =event.full_street_address
+      .event-delete
+        =link_to "delete", event_path(event), method: :delete, remote: true, class: "button radius tiny"

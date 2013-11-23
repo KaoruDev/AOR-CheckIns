@@ -48,7 +48,7 @@
     masonry: function(container){
       for(var i = 0; i < container.length; i++){
         init.msnry.push(new Masonry( container[i], {
-          columnWidth: $('.grid-sizer')[0],
+          columnWidth: '.grid-sizer',
           gutter: 10,
           itemSelector: ".brick"
         }))
@@ -57,34 +57,31 @@
     },
 
     addUser: function(data){
-      if(data){
-        window.data = data;
-        var newHTML = $(_.getTemplate("check-ins")(data));
-      
-        if(iswaterfallActive()){
-          $(".attendees").prepend(newHTML);
-          readyBlock();
-          animateBlock();
-          timer.activate();
-        }else if(animating){
+      window.data = data;
+      if(data && animating){
+        var newHTML = $.parseHTML(_.getTemplate("check-ins")(data))[1]
+        var frag = document.createDocumentFragment();
+        frag.appendChild(newHTML);
+        $(".attendees").prepend(frag);
+        init.msnry[0].prepended([newHTML]);
 
-        }else{
-          $(".attendees").prepend(newHTML);
-        }
+      }else if(data){
+
+        var newHTML = $.parseHTML(_.getTemplate("check-ins")(data))[1]
+        var frag = document.createDocumentFragment();
+        frag.appendChild(newHTML);
+        $(".attendees").append(frag);
       }
+
     },
 
     waterfall: function(e){
       e.preventDefault();
+      init.msnry[0].prepended($(".follow-attendee"))
       toggleAnimationButton();
       $(".main-content").css({
         height: window.innerHeight - 20
       });
-      $(".attendees").css({
-        position: "fixed",
-        top: 20
-      });
-
       timer.activate();
     }
   }
@@ -106,9 +103,6 @@
     toggleAnimationButton();
     $(".main-content").css({
       height: "100%"
-    });
-    $(".attendees").css({
-      position: "static"
     });
   }
 

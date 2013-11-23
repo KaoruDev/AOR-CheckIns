@@ -5,18 +5,15 @@
       
 -if @events[:current_events].count > 0
   %h3 Today's events
-  .masonry-container
-    =render "event_list", :events => @events[:current_events]
+  =render "event_list", :events => @events[:current_events]
   
 -if @events[:future_events].count > 0
   %h3 Future events 
-  .masonry-container
-    =render "event_list", :events => @events[:future_events]
+  =render "event_list", :events => @events[:future_events]
 
 -if @events[:past_events].count > 0   
   %h3 Past events
-  .masonry-container
-    =render "event_list", :events => @events[:past_events]
+  =render "event_list", :events => @events[:past_events]
 
 =# Only add if admin
 #myModal.reveal-modal.small
