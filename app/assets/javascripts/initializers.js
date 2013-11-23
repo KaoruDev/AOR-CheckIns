@@ -62,14 +62,14 @@
         var newHTML = $(_.getTemplate("check-ins")(data));
       
         if(iswaterfallActive()){
-          $(".attendees").append(newHTML);
+          $(".attendees").prepend(newHTML);
           readyBlock();
           animateBlock();
           timer.activate();
         }else if(animating){
-          
+
         }else{
-          $(".attendees").append(newHTML);
+          $(".attendees").prepend(newHTML);
         }
       }
     },
@@ -82,7 +82,7 @@
       });
       $(".attendees").css({
         position: "fixed",
-        bottom: 20
+        top: 20
       });
 
       timer.activate();
@@ -128,14 +128,13 @@
 
   var rotateAttendees = function(){
     if(iswaterfallActive()){
+      // readyBlock();
       for(var i = 0; i < 2; i++){
-        var attendeeBlock = _.first($(".attendees").find(".follow-attendee"));
-        $(attendeeBlock).remove();
-        $(".attendees").append(attendeeBlock);
+        var attendeeBlock = $(_.last($(".attendees").find(".follow-attendee"))).clone();
+        $(".attendees").prepend(attendeeBlock);
       }
 
-      readyBlock();
-      animateBlock();
+      // animateBlock();
       timer.activate();
 
       
@@ -147,7 +146,7 @@
 
   var readyBlock = function(){
     $(".attendees").css({
-      bottom: -444
+      top: -444
     });
   }
 
@@ -155,13 +154,15 @@
     animating = false;
     $(".attendees").animate(
       {
-        bottom: 20
+        top: 20
       },
 
       {
         duration: 500,
         complete: function(){
-          console.log("reset!");
+          for(var i = 0; i < 2; i++){
+            $(_.last($(".attendees").find(".follow-attendee"))).remove();
+          }
           animating = true;
         }
       }
@@ -180,10 +181,10 @@
 
   var iswaterfallActive = function(){
     if(waterfallActive){
-      return waterfallActive;
-    }else if($(".attendees").find(".follow-attendee").length > 7 && animating){
+      return true;
+    }else if(window.innerHeight + 222 < $(".attendees").height() && animating){
       waterfallActive = true;
-      return waterfallActive;
+      return true;
     }else{
       return false;
     }
