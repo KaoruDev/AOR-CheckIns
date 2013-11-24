@@ -63,6 +63,12 @@
 
 .attendees{
   @include clearfix;
+  margin-top: 20px;
+
+  @include breakpoint(papa-bear){
+    margin-top: 0px;
+  }
+
 }
 
 .follow-attendee{
@@ -88,6 +94,11 @@
   padding: 10px;
   border-radius: 15px;
 
+  @include breakpoint(baby-bear){
+    min-height: 150px;
+  }
+
+
   .avatar{
     float: left;
     margin-right: 10px;
@@ -99,11 +110,17 @@
     }
     @include breakpoint(mama-bear){
       width: 30%;
-      min-height: 180px;
+      height: 180px;
     }
     
     img{
-      max-height: 180px;
+      max-height: 50px;
+      @include breakpoint(baby-bear){
+        max-height: 100px;
+      }
+      @include breakpoint(mama-bear){
+        max-height: 180px;
+      }
     }
   }
 
