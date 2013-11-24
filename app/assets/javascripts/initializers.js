@@ -58,42 +58,52 @@
 
     addUser: function(data){
       window.data = data;
-      for(var i = 0; i < 4; i++){
+      images = [
+        "http://images4.fanpop.com/image/photos/15400000/Cat-gif-cats-15443764-340-255.gif",
+        "http://data2.whicdn.com/images/45910412/Peter-Griffin-Gets-A-Little-Dance-Crazy-Family-Guy_large.gif",
+        "http://www.hdwallpapersplus.com/wp-content/uploads/2013/10/23/funny-gifs-jim-derpy.gif",
+        "http://4.bp.blogspot.com/-G116XSEP8Cg/UG8pmTQFj8I/AAAAAAAACn0/AhNB9H8OQJs/s1600/raleigh%2Bcorporate%2Bportraits.jpg",
+        "http://3.bp.blogspot.com/_ieToa1g-APw/TJ7A9jbAivI/AAAAAAAAACA/r-wrYjNkqw0/s1600/jack+nicholson+by+martin+schoeller+2002.jpg",
+        "http://www.thisiscolossal.com/wp-content/uploads/2012/01/jon-1.jpg",
+        "http://shechive.files.wordpress.com/2012/05/celeb-portraits-14.jpg?w=500&h=612",
+        "http://cdn.twentytwowords.com/wp-content/uploads/Pencil-Portraits-of-Celebrities-Hugh-Laurie-634x812.jpg",
+        "http://i1-news.softpedia-static.com/images/news2/Adam-Levine-to-Be-Named-People-s-Hottest-Man-Alive-for-2013-400531-2.jpg?1384508036"
+
+      ]
+      for(var i = 0; i < images.length; i++){
+        data.avatar = images[i]
         if(data && animating){
           init.msnry[0].prepended(addAttendee(data));
+          init.msnry[0].layout();
         }else if(data){
           addAttendee(data);
         }
       }
+      timer.activate();
     },
 
     waterfall: function(e){
       e.preventDefault();
       init.masonry($(".attendees"));
 
-      init.msnry[0].on('removeComplete', function(msnryInstance, removedItems){
-        var frag = document.createDocumentFragment();
-        elem = removedItems[0].element;
-        frag.appendChild(elem);
-        $(".attendees").prepend(frag);
-        init.msnry[0].prepended(elem);
-      });
-
       toggleAnimationButton();
       $(".main-content").css({
-        height: window.innerHeight - 20
+        height: window.innerHeight - 20,
+        width: window.innerWidth - 20,
+        position: "fixed"
       });
       timer.activate();
     }
   }
 
-  var timer = {
+  window.timer = {
     activate: function(){
       this.cancel();
-      this.timeoutID = window.setTimeout(rotateAttendees, 3000);
+      this.timeoutID = window.setTimeout(rotateAttendees, 4000);
     },
     cancel: function(){
-      if(typeof this.timeoutID == "number"){
+      if(typeof this.timeoutID === "number"){
+        console.log("clear timeout")
         window.clearTimeout(this.timeoutID);
         delete this.timeoutID;
       }
@@ -103,7 +113,9 @@
   var stopWaterfall = function(){
     toggleAnimationButton();
     $(".main-content").css({
-      height: "100%"
+      height: "100%",
+      width: "auto",
+      position: "static"
     });
     init.msnry[0].destroy();
     init.msnry = [];
@@ -125,40 +137,21 @@
 
   var rotateAttendees = function(){
     if(iswaterfallActive()){
-      var attendeeBlock = $(_.last($(".attendees").find(".follow-attendee")))[0];
-      init.msnry[0].remove(attendeeBlock);
+      var attendeeBlocks = _.last($(".attendees").find(".follow-attendee"), 2);
+      var newBlock = $(attendeeBlocks).clone();
+      init.msnry[0].remove(attendeeBlocks);
+      
+      $(".attendees").prepend(newBlock);
+      init.msnry[0].prepended(newBlock);
+
+      timer.activate();
+
 
     }else if(animating){
       timer.activate();
     }
 
   }
-
-  // var readyBlock = function(){
-  //   $(".attendees").css({
-  //     top: -444
-  //   });
-  // }
-
-  // var animateBlock = function(){
-  //   animating = false;
-  //   $(".attendees").animate(
-  //     {
-  //       top: 20
-  //     },
-
-  //     {
-  //       duration: 500,
-  //       complete: function(){
-  //         for(var i = 0; i < 2; i++){
-  //           $(_.last($(".attendees").find(".follow-attendee"))).remove();
-  //         }
-  //         animating = true;
-  //       }
-  //     }
-  //   )
-  // }
-
 
 /////////////////////  
 //
