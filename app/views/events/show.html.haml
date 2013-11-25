@@ -45,14 +45,14 @@
                 %strong {{ twitter_handle }}
             .bio
               {{ bio }}
+  -if @event.current_event
+    =subscribe_to "/messages/#{@event.id}"
 
   -if current_user.is_admin
     :javascript
       $(".animate").on("click", init.waterfall);
 
   -if can_user_check_in
-    =subscribe_to "/messages/#{@event.id}"
-
     :javascript
       init.pinpoint(#{@event.id}, #{current_user.id})
 

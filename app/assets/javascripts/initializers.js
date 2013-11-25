@@ -57,40 +57,29 @@
     },
 
     addUser: function(data){
-      window.data = data;
-      // images = [
-      //   "http://images4.fanpop.com/image/photos/15400000/Cat-gif-cats-15443764-340-255.gif",
-      //   "http://data2.whicdn.com/images/45910412/Peter-Griffin-Gets-A-Little-Dance-Crazy-Family-Guy_large.gif",
-      //   "http://www.hdwallpapersplus.com/wp-content/uploads/2013/10/23/funny-gifs-jim-derpy.gif",
-      //   "http://4.bp.blogspot.com/-G116XSEP8Cg/UG8pmTQFj8I/AAAAAAAACn0/AhNB9H8OQJs/s1600/raleigh%2Bcorporate%2Bportraits.jpg",
-      //   "http://3.bp.blogspot.com/_ieToa1g-APw/TJ7A9jbAivI/AAAAAAAAACA/r-wrYjNkqw0/s1600/jack+nicholson+by+martin+schoeller+2002.jpg",
-      //   "http://www.thisiscolossal.com/wp-content/uploads/2012/01/jon-1.jpg",
-      //   "http://shechive.files.wordpress.com/2012/05/celeb-portraits-14.jpg?w=500&h=612",
-      //   "http://cdn.twentytwowords.com/wp-content/uploads/Pencil-Portraits-of-Celebrities-Hugh-Laurie-634x812.jpg",
-      //   "http://i1-news.softpedia-static.com/images/news2/Adam-Levine-to-Be-Named-People-s-Hottest-Man-Alive-for-2013-400531-2.jpg?1384508036"
-      // ]
-      // for(var i = 0; i < images.length; i++){
-        // data.avatar = images[i]
-        if(data && animating){
-          init.msnry[0].prepended(addAttendee(data));
-          init.msnry[0].layout();
-        }else if(data){
-          addAttendee(data);
-        }
-      // }
+      if(data && animating){
+        init.msnry[0].prepended(addAttendee(data));
+        init.msnry[0].layout();
+      }else if(data){
+        addAttendee(data);
+      }
       timer.activate();
+
+      
     },
 
     waterfall: function(e){
-      e.preventDefault();
-      init.masonry($(".attendees"));
 
-      toggleAnimationButton();
       $(".main-content").css({
         height: window.innerHeight - 20,
         width: window.innerWidth - 20,
         position: "fixed"
       });
+
+      e.preventDefault();
+      init.masonry($(".attendees"));
+
+      toggleAnimationButton();
       timer.activate();
     }
   }
@@ -102,7 +91,6 @@
     },
     cancel: function(){
       if(typeof this.timeoutID === "number"){
-        console.log("clear timeout")
         window.clearTimeout(this.timeoutID);
         delete this.timeoutID;
       }
@@ -164,7 +152,7 @@
   var iswaterfallActive = function(){
     if(waterfallActive){
       return true;
-    }else if(window.innerHeight + 222 < $(".attendees").height() && animating){
+    }else if(window.innerHeight < $(".attendees").height() && animating){
       waterfallActive = true;
       return true;
     }else{
