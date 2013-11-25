@@ -1,6 +1,6 @@
 .sign-out
   .row
-    -if true
+    -if current_user.is_admin
       .columns.large-6
         =button_tag "Add Event", class: "add-event radius button expand"
       .columns.large-6

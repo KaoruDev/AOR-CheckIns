@@ -15,9 +15,9 @@
   %h3 Past events
   =render "event_list", :events => @events[:past_events]
 
-=# Only add if admin
-#myModal.reveal-modal.small
-  = render "events_form"
+-if current_user.is_admin
+  #myModal.reveal-modal.small
+    = render "events_form"
 
 =content_for :javascript do
   :javascript

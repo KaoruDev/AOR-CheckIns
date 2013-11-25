@@ -162,7 +162,6 @@
   var waterfallActive = false;
 
   var iswaterfallActive = function(){
-    return true;
     if(waterfallActive){
       return true;
     }else if(window.innerHeight + 222 < $(".attendees").height() && animating){

@@ -8,25 +8,26 @@
           =@event.name
         .single-event-date
           =@event.date.strftime("%b %d, %Y")
-      -if true #current_user.is_admin
+      -if current_user.is_admin
         %button.button.radius.animate Animate!
     
     .waterfall-body
       .attendees
         .grid-sizer
-      -@attendees.each do |attendee|
-        .attendee
-          .avatar
-            =image_tag attendee.avatar
-          .info
-            .attendee-name= attendee.name
-            .twitter-contact
-              .twitter-icon
-                %i.fa.fa-twitter-square
-              .twitter-handle
-                %strong= attendee.twitter_handle
-            .bio
-              =attendee.bio
+        -@attendees.each do |attendee|
+          %a{href: "https://twitter.com/intent/user?screen_name=#{attendee.twitter_handle}", class: "brick follow-attendee"} 
+            .attendee
+              .avatar
+                =image_tag attendee.avatar
+              .info
+                .attendee-name= attendee.name
+                .twitter-contact
+                  .twitter-icon
+                    %i.fa.fa-twitter-square
+                  .twitter-handle
+                    %strong= attendee.twitter_handle
+                .bio
+                  =attendee.bio
   
 =content_for :javascript do
   #templates
@@ -45,7 +46,7 @@
             .bio
               {{ bio }}
 
-  -if true #current_user.is_admin
+  -if current_user.is_admin
     :javascript
       $(".animate").on("click", init.waterfall);
 
