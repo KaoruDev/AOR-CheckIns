@@ -8,5 +8,6 @@
         =event.date.strftime("%b %d, %Y")
       .event-address
         =event.full_street_address
-      .event-delete
-        =link_to "delete", event_path(event), method: :delete, remote: true, class: "button radius tiny"
+      -if current_user.is_admin
+        .event-delete
+          =link_to "delete", event_path(event), method: :delete, remote: true, class: "button radius tiny"

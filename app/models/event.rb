@@ -6,8 +6,8 @@ class Event < ActiveRecord::Base
   after_validation :geocode, :set_timezone_and_date
 
   # Returns a hash consisting of 3 arrays, current_event, future_events, and past_events
-  def self.update_and_get_all
-    separate_events self.all
+  def self.update_and_get_all(is_current_user_admin)
+    separate_events(self.all, is_current_user_admin)
   end
   
   def is_user_nearby(longitude, latitude)
@@ -45,16 +45,17 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def self.separate_events(events)
+  def self.separate_events(events, is_current_user_admin)
     results = {
       current_events: [],
       future_events: [],
       past_events: []
     }
+
     events.each do |event|
       if !event.current_event
         results[:past_events] << event
-      elsif is_event_in_the_future? event
+      elsif is_event_in_the_future?(event)
         results[:future_events] << event
       elsif is_event_before_today? event
         event.current_event = false
@@ -64,6 +65,9 @@ class Event < ActiveRecord::Base
         results[:current_events] << event
       end
     end
+
+  
+    results[:future_events] = [] unless is_current_user_admin
 
     results[:past_events] = sort_by_date results[:past_events]
     results[:future_events] = sort_by_date results[:future_events]
