@@ -14,6 +14,19 @@
     .waterfall-body
       .attendees
         .grid-sizer
+      -@attendees.each do |attendee|
+        .attendee
+          .avatar
+            =image_tag attendee.avatar
+          .info
+            .attendee-name= attendee.name
+            .twitter-contact
+              .twitter-icon
+                %i.fa.fa-twitter-square
+              .twitter-handle
+                %strong= attendee.twitter_handle
+            .bio
+              =attendee.bio
   
 =content_for :javascript do
   #templates
@@ -41,3 +54,6 @@
 
     :javascript
       init.pinpoint(#{@event.id}, #{current_user.id})
+
+
+

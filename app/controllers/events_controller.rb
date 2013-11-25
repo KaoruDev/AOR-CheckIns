@@ -28,8 +28,8 @@ class EventsController < ApplicationController
       respond_to do |format|
         format.json{
           user = User.find(params[:user_id])
-          # check_in = @event.check_ins.build(user_id: params[:user_id])
-          # check_in.save
+          check_in = @event.check_ins.build(user_id: params[:user_id])
+          check_in.save
           PrivatePub.publish_to("/messages/#{@event.id}", "init.addUser(#{user.to_json})");
           render :json => {atEvent: true}
         }
