@@ -5,6 +5,7 @@
   border-radius: 5px;
   padding: 10px;
   width: 100%;
+  background: $white;
   @include breakpoint(mama-bear){
     width: 30%;
   }
@@ -20,6 +21,10 @@
 .event-title{
   font-size: 2.5em;
   margin-bottom: 5px;
+  word-break: break-all;
+  @include breakpoint(mama-bear){
+    font-size: 2em;
+  }
 }
 
 .event-address{

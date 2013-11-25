@@ -81,6 +81,7 @@
   display: block;
   border-radius: 15px;
   margin: 5px;
+  background: $white;
 
   &:hover{
     background: $primary;
@@ -116,7 +117,7 @@
     }
     @include breakpoint(mama-bear){
       width: 30%;
-      height: 180px;
+      height: 135px;
     }
     
     img{
